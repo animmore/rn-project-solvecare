@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
   },
   userName: {
-    fontSize: 20,
+    fontSize: 19,
   },
 })
 

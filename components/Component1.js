@@ -4,6 +4,8 @@ import PropTypes, {bool, object, number, any} from 'prop-types'
 // import {FormErrors} from '../FormErrors'
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import {bold} from 'ansi-colors'
+// import {createAppContainer} from 'react-navigation'
+// import {createStackNavigator} from 'react-navigation-stack'
 
 type Props = {|
   onSubmit: (
@@ -60,18 +62,18 @@ export class Component1 extends Component<Props, State> {
     },
   }
 
-  validateForm() {
-    this.setState({
-      formValid:
-        this.state.formErrors.creditCardNumber &&
-        this.state.formErrors.cvv &&
-        this.state.formErrors.expirationDate &&
-        this.state.formErrors.firstName &&
-        this.state.formErrors.lastName &&
-        this.state.formErrors.secretQuestion &&
-        this.state.formErrors.secretAnswer,
-    })
-  }
+  // validateForm() {
+  //   this.setState({
+  //     formValid:
+  //       this.state.formErrors.creditCardNumber &&
+  //       this.state.formErrors.cvv &&
+  //       this.state.formErrors.expirationDate &&
+  //       this.state.formErrors.firstName &&
+  //       this.state.formErrors.lastName &&
+  //       this.state.formErrors.secretQuestion &&
+  //       this.state.formErrors.secretAnswer,
+  //   })
+  // }
 
   handleSubmit = () => {
     const {firstName, lastName, creditCardNumber, typeOfCard} = this.state
@@ -79,55 +81,55 @@ export class Component1 extends Component<Props, State> {
     this.props.onSubmit(firstName, lastName, creditCardNumber, typeOfCard)
   }
 
-  handleInputChange = (event: SyntheticEvent<HTMLInputElement>) => {
+  handleInputChange = (name: string) => (event: SyntheticEvent<HTMLInputElement>) => {
     const {name, value} = event.currentTarget
     this.setState({[name]: value}, () => {
       this.validateField(name, value)
     })
   }
 
-  validateField(fieldName: string, value: string) {
-    const fieldValidationErrors = this.state.formErrors
-    const {creditCardNumber} = this.state
-    const {cvv} = this.state
-    const {expirationDate} = this.state
-    const {firstName} = this.state
-    const {lastName} = this.state
-    const {secretQuestion} = this.state
-    const {secretAnswer} = this.state
+  // validateField(fieldName: string, value: string) {
+  //   const fieldValidationErrors = this.state.formErrors
+  //   const {creditCardNumber} = this.state
+  //   const {cvv} = this.state
+  //   const {expirationDate} = this.state
+  //   const {firstName} = this.state
+  //   const {lastName} = this.state
+  //   const {secretQuestion} = this.state
+  //   const {secretAnswer} = this.state
 
-    switch (fieldName) {
-      case 'creditCardNumber':
-        fieldValidationErrors.creditCardNumber = value.match(cardRegex) ? '' : 'invalid card number'
-        break
+  //   switch (fieldName) {
+  //     case 'creditCardNumber':
+  //       fieldValidationErrors.creditCardNumber = value.match(cardRegex) ? '' : 'invalid card number'
+  //       break
 
-      case 'cvv':
-        fieldValidationErrors.cvv = value.match(cvvRegex) ? '' : 'invalid CVV/CVC'
-        break
-      case 'expirationDate':
-        fieldValidationErrors.expirationDate = value.match(expRegex) ? '' : 'invalid MM/YY'
-        break
-      case 'firstName':
-        fieldValidationErrors.firstName = value.length < 3 ? 'minimum 3 characaters required' : ''
-        break
-      case 'lastName':
-        fieldValidationErrors.lastName = value.length < 2 ? 'minimum 3 characaters required' : ''
-        break
-      case 'secretQuestion':
-        fieldValidationErrors.secretQuestion =
-          value.length < 9 ? 'minimum 10 characaters required' : ''
-        break
-      case 'secretAnswer':
-        fieldValidationErrors.secretAnswer =
-          value.length < 3 ? 'minimum 4 characaters required' : ''
-        break
+  //     case 'cvv':
+  //       fieldValidationErrors.cvv = value.match(cvvRegex) ? '' : 'invalid CVV/CVC'
+  //       break
+  //     case 'expirationDate':
+  //       fieldValidationErrors.expirationDate = value.match(expRegex) ? '' : 'invalid MM/YY'
+  //       break
+  //     case 'firstName':
+  //       fieldValidationErrors.firstName = value.length < 3 ? 'minimum 3 characaters required' : ''
+  //       break
+  //     case 'lastName':
+  //       fieldValidationErrors.lastName = value.length < 2 ? 'minimum 3 characaters required' : ''
+  //       break
+  //     case 'secretQuestion':
+  //       fieldValidationErrors.secretQuestion =
+  //         value.length < 9 ? 'minimum 10 characaters required' : ''
+  //       break
+  //     case 'secretAnswer':
+  //       fieldValidationErrors.secretAnswer =
+  //         value.length < 3 ? 'minimum 4 characaters required' : ''
+  //       break
 
-      default:
-        break
-    }
+  //     default:
+  //       break
+  //   }
 
-    this.setState({fieldValidationErrors, [fieldName]: value}, () => console.log(this.state))
-  }
+  //   this.setState({fieldValidationErrors, [fieldName]: value}, () => console.log(this.state))
+  // }
 
   handleTypeOfCardChange = (typeOfCard: string) => {
     this.setState({typeOfCard})
@@ -136,7 +138,6 @@ export class Component1 extends Component<Props, State> {
   render() {
     console.log('(render) Component1')
     const {fieldValidationErrors, creditCardNumber} = this.state
-
     return (
       <View style={styles.Component1}>
         <Text style={styles.header}> Enter Yours Data </Text>
@@ -179,7 +180,7 @@ export class Component1 extends Component<Props, State> {
             placeholder="Your surname"
             placeholderTextColor="#FFFFFF"
             onChangeText={(lastName) => this.setState({lastName})}
-            value={this.state.lastName}
+            value={this.state.last}
           />
         </View>
 
@@ -198,7 +199,10 @@ export class Component1 extends Component<Props, State> {
           value={this.state.secretAnswer}
         />
 
-        <TouchableOpacity style={styles.button} onPress={this.handleSubmit}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={/*() => this.props.navigation.navigate('Details'),*/ this.handleSubmit}
+        >
           <Text style={styles.btntext}>SUBMIT</Text>
         </TouchableOpacity>
         <View>
@@ -211,6 +215,12 @@ export class Component1 extends Component<Props, State> {
     )
   }
 }
+
+// const AppNavigator = createStackNavigator({
+//   Home: {
+//     screen: Component1,
+//   },
+// })
 
 const styles = StyleSheet.create({
   Component1: {
@@ -255,4 +265,5 @@ const styles = StyleSheet.create({
   },
 })
 
+// export {AppNavigator}
 export default Component1

@@ -1,5 +1,9 @@
 import React, {Component} from 'react'
 import {StyleSheet, View, Text, TextInput} from 'react-native'
+// import {createAppContainer} from 'react-navigation'
+// import {createStackNavigator} from 'react-navigation-stack'
+// import Component1 from './Component1'
+
 type Props = {
   firstName: string,
   lastName: string,
@@ -54,6 +58,7 @@ export class Component2 extends Component<Props, State> {
   }
 
   render() {
+    
     console.log('(render) Component2')
     const {firstName, lastName, creditCardNumber, typeOfCard} = this.props
     const {isFormVisible} = this.state
@@ -63,6 +68,7 @@ export class Component2 extends Component<Props, State> {
 
     return (
       <View style={styles.Component2}>
+        <Component2 />
         <TextInput
           style={styles.textinput}
           placeholder="First Name"
@@ -92,6 +98,16 @@ export class Component2 extends Component<Props, State> {
   }
 }
 
+// const RootStack = createStackNavigator(
+//   {
+//     Home: Component1,
+//     Details: Component2,
+//   },
+//   {
+//     initialRouteName: 'Component1',
+//   },
+// )
+
 const styles = StyleSheet.create({
   Component2: {
     alignSelf: 'stretch',
@@ -109,4 +125,5 @@ const styles = StyleSheet.create({
   },
 })
 
+// export {RootStack}
 export default Component2
