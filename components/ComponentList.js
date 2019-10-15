@@ -89,16 +89,20 @@ export class ComponentList extends Component {
     this.setState({data: json.results})
   }
 
+
+  
+
   render() {
     return (
       <View style={styles.container}>
         <FlatList
           data={this.state.data}
-          keyExtractor={(x, i) => i}
-          renderItem={({item}) => (
+          keyExtractor={(item, index) => index}
+          renderItem={({item, index}) => (
             <View style={{flex: 1, flexDirection: 'row'}}>
               <Image source={{uri: item.picture.large}} style={styles.images} />
-              <Text style={styles.userName}>{`${item.name.first} ${item.name.last}`}</Text>
+              <Text style={styles.numUsers}>{index + 1}</Text>
+              <Text style={styles.userName}>{` ${item.name.first} ${item.name.last}`}</Text>
             </View>
           )}
         />
@@ -124,6 +128,10 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 19,
   },
+  numUsers: {
+    fontSize: 19,
+    color: '#23AA8F'
+  }
 })
 
 export default ComponentList
