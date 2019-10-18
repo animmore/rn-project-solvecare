@@ -1,34 +1,16 @@
+/*eslint-disable*/
 import React, {Component} from 'react'
-import Component3 from './Component3'
+import Component3 from '../Component3/Component3'
 import PropTypes, {bool, object, number, any} from 'prop-types'
 // import {FormErrors} from '../FormErrors'
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import {bold} from 'ansi-colors'
-// import {createAppContainer} from 'react-navigation'
-// import {createStackNavigator} from 'react-navigation-stack'
+// import {callAPI} from '../../server/CallAPI'
 
-type Props = {|
-  onSubmit: (
-    creditCardNumber: string,
-    firstName: string,
-    lastName: string,
-    typeOfCard: string,
-  ) => void,
-|}
+type Props = {}
 
 type State = {|
-  creditCardNumber: string,
-  expirationDate: string,
-  cvv: string,
-  firstName: string,
-  lastName: string,
-  secretQuestion: string,
-  secretAnswer: string,
-  submitFormVisible: boolean,
-  typeOfCard: string,
-
   fieldValidationErrors: object,
-
   formValid: any,
   formErrors: object,
 |}
@@ -38,28 +20,55 @@ const cvvRegex = RegExp(/^[0-9]{3,4}$/)
 const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/)
 
 export class Component1 extends Component<Props, State> {
-  state = {
-    creditCardNumber: '',
-    cvv: '',
-    expirationDate: '',
-    firstName: '',
-    lastName: '',
-    secretQuestion: '',
-    secretAnswer: '',
-    submitFormVisible: false,
-    typeOfCard: '',
+  constructor() {
+    super()
 
-    formValid: object,
-    fieldValidationErrors: '',
-    formErrors: {
-      creditCardNumber: '',
-      cvv: '',
-      expirationDate: '',
-      firstName: '',
-      lastName: '',
-      secretQuestion: '',
-      secretAnswer: '',
-    },
+    state = {
+      submitFormVisible: false,
+
+      formValid: object,
+      fieldValidationErrors: '',
+      formErrors: {
+        creditCardNumber: '',
+        cvv: '',
+        expirationDate: '',
+        firstName: '',
+        lastName: '',
+        secretQuestion: '',
+        secretAnswer: '',
+      },
+    }
+
+    this.onChangeCreditCardNumber = this.onChangeCreditCardNumber.bind(this)
+    this.onChangeCvv = this.onChangeCvv.bind(this)
+    this.onChangeExpirationDate = this.onChangeExpirationDate.bind(this)
+    this.onChangeFirstName = this.onChangeFirstName.bind(this)
+    this.onChangeLastName = this.onChangeLastName.bind(this)
+    this.onChangeSecretQuestion = this.onChangeSecretQuestion.bind(this)
+    this.onChangeSecretAnswer = this.onChangeSecretAnswer.bind(this)
+  }
+
+  onChangeCreditCardNumber(value) {
+    this.props.setCreditCardNumber(value)
+  }
+  onChangeCvv(value) {
+    this.props.setCvv(value)
+  }
+  onChangeExpirationDate(value) {
+    this.props.setExpirationDate(value)
+  }
+  onChangeFirstName(value) {
+    this.props.setFirstName(value)
+  }
+  onChangeLastName(value) {
+    this.props.setLastName(value)
+  }
+
+  onChangeSecretQuestion(value) {
+    this.props.setSecretQuestion(value)
+  }
+  onChangeSecretAnswer(value) {
+    this.props.setSecretAnswer(value)
   }
 
   // validateForm() {
@@ -74,18 +83,11 @@ export class Component1 extends Component<Props, State> {
   //       this.state.formErrors.secretAnswer,
   //   })
   // }
-
-  handleSubmit = () => {
-    const {firstName, lastName, creditCardNumber, typeOfCard} = this.state
-
-    this.props.onSubmit(firstName, lastName, creditCardNumber, typeOfCard)
-  }
-
-  handleInputChange = (name: string) => (event: SyntheticEvent<HTMLInputElement>) => {
+  handleInputChange = (name: string) => (event) => {
     const {name, value} = event.currentTarget
-    this.setState({[name]: value}, () => {
+    this.setState({[name]: value} /*, () => {
       this.validateField(name, value)
-    })
+    }*/)
   }
 
   // validateField(fieldName: string, value: string) {
@@ -135,9 +137,11 @@ export class Component1 extends Component<Props, State> {
     this.setState({typeOfCard})
   }
 
+  // callAPI(values).then((data) => console.log(data))
+
   render() {
     console.log('(render) Component1')
-    const {fieldValidationErrors, creditCardNumber} = this.state
+    // const {fieldValidationErrors, creditCardNumber} = this.state
     return (
       <View style={styles.Component1}>
         <Text style={styles.header}> Enter Yours Data </Text>
@@ -146,8 +150,8 @@ export class Component1 extends Component<Props, State> {
           style={styles.textinput}
           placeholder="0000 0000 0000 0000"
           placeholderTextColor="#FFFFFF"
-          onChangeText={(creditCardNumber) => this.setState({creditCardNumber})}
-          value={this.state.creditCardNumber}
+          onChangeText={this.onChangeCreditCardNumber}
+          value={this.props.creditCardNumber}
         />
 
         <View style={styles.cont}>
@@ -155,15 +159,15 @@ export class Component1 extends Component<Props, State> {
             style={styles.textinput}
             placeholder="CVV/CVC"
             placeholderTextColor="#FFFFFF"
-            onChangeText={(cvv) => this.setState({cvv})}
-            value={this.state.cvv}
+            onChangeText={this.onChangeCvv}
+            value={this.props.cvv}
           />
           <TextInput
             style={styles.textinput}
             placeholder="MM/YY"
             placeholderTextColor="#FFFFFF"
-            onChangeText={(expirationDate) => this.setState({expirationDate})}
-            value={this.state.expirationDate}
+            onChangeText={this.onChangeExpirationDate}
+            value={this.props.expirationDate}
           />
         </View>
 
@@ -172,15 +176,15 @@ export class Component1 extends Component<Props, State> {
             style={styles.textinput}
             placeholder="Your name"
             placeholderTextColor="#FFFFFF"
-            onChangeText={(firstName) => this.setState({firstName})}
-            value={this.state.firstName}
+            onChangeText={this.onChangeFirstName}
+            value={this.props.firstName}
           />
           <TextInput
             style={styles.textinput}
             placeholder="Your surname"
             placeholderTextColor="#FFFFFF"
-            onChangeText={(lastName) => this.setState({lastName})}
-            value={this.state.last}
+            onChangeText={this.onChangeLastName}
+            value={this.props.lastName}
           />
         </View>
 
@@ -188,39 +192,30 @@ export class Component1 extends Component<Props, State> {
           style={styles.textinput}
           placeholder="Your secret question"
           placeholderTextColor="#FFFFFF"
-          onChangeText={(secretQuestion) => this.setState({secretQuestion})}
-          value={this.state.secretQuestion}
+          onChangeText={this.onChangeSecretQuestion}
+          value={this.props.secretQuestion}
         />
         <TextInput
           style={styles.textinput}
           placeholder="Your secret answer"
           placeholderTextColor="#FFFFFF"
-          onChangeText={(secretAnswer) => this.setState({secretAnswer})}
-          value={this.state.secretAnswer}
+          onChangeText={this.onChangeSecretAnswer}
+          value={this.props.secretAnswer}
         />
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={/*() => this.props.navigation.navigate('Details'),*/ this.handleSubmit}
-        >
+        <TouchableOpacity style={styles.button}>
           <Text style={styles.btntext}>SUBMIT</Text>
         </TouchableOpacity>
         <View>
           <Component3
             onTypeOfCard={this.handleTypeOfCardChange}
-            creditCardNumber={this.state.creditCardNumber}
+            creditCardNumber={this.props.creditCardNumber}
           />
         </View>
       </View>
     )
   }
 }
-
-// const AppNavigator = createStackNavigator({
-//   Home: {
-//     screen: Component1,
-//   },
-// })
 
 const styles = StyleSheet.create({
   Component1: {
@@ -265,5 +260,4 @@ const styles = StyleSheet.create({
   },
 })
 
-// export {AppNavigator}
 export default Component1

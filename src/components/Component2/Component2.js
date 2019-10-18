@@ -1,8 +1,6 @@
+/*eslint-disable*/
 import React, {Component} from 'react'
 import {StyleSheet, View, Text, TextInput} from 'react-native'
-// import {createAppContainer} from 'react-navigation'
-// import {createStackNavigator} from 'react-navigation-stack'
-// import Component1 from './Component1'
 
 type Props = {
   firstName: string,
@@ -98,16 +96,6 @@ export class Component2 extends Component<Props, State> {
   }
 }
 
-// const RootStack = createStackNavigator(
-//   {
-//     Home: Component1,
-//     Details: Component2,
-//   },
-//   {
-//     initialRouteName: 'Component1',
-//   },
-// )
-
 const styles = StyleSheet.create({
   Component2: {
     alignSelf: 'stretch',
@@ -125,5 +113,4 @@ const styles = StyleSheet.create({
   },
 })
 
-// export {RootStack}
 export default Component2

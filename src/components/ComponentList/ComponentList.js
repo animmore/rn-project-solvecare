@@ -84,7 +84,7 @@ export class ComponentList extends Component {
   }
 
   fetchData = async () => {
-    const response = await fetch('https://randomuser.me/api?results=50')
+    const response = await fetch('https://randomuser.me/api?results=500')
     const json = await response.json()
     this.setState({data: json.results})
   }
