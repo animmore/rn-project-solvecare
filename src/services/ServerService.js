@@ -1,19 +1,25 @@
 import {onValidation} from './ValidationService'
 
-const callApi = (data) => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(onValidation()), 3000)
+const callApi = (values) => {
+  return new Promise((resolve, reject) => {
+    const error = onValidation(values)
+
+    const sendResponse = () => {
+      error ? reject(error) : resolve()
+    }
+
+    setTimeout(sendResponse, 3000)
   })
 }
 
-const onServerValidation = () => {
-  return callApi();
-};
+const onServerValidation = (values) => {
+  return callApi(values)
+}
 
 class ServerService {
-  callServerValidation() {
-    return onServerValidation();
+  callServerValidation(values) {
+    return onServerValidation(values)
   }
 }
 
-export {ServerService};
+export {ServerService}

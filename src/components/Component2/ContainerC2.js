@@ -13,11 +13,12 @@ export class ContainerC2 extends Component {
         lastName={this.props.lastName}
         isFormVisible={this.props.isFormVisible}
         isError={this.props.isError}
+        isLoading={this.props.isLoading}
       />
     )
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     isFormVisible: state.show.isFormVisible,
     creditCardNumber: state.form.creditCardNumber,

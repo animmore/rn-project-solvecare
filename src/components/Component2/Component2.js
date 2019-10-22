@@ -38,9 +38,6 @@ export class Component2 extends Component<Props, State> {
     const {firstName, lastName, creditCardNumber, isLoading, isError} = this.props
     const {typeOfCard} = this.state
     const {isFormVisible} = this.props
-    if (!isFormVisible || (!firstName && !lastName && !creditCardNumber) && isError) {
-      return null
-    }
 
     if (isError) {
       return (
@@ -57,37 +54,40 @@ export class Component2 extends Component<Props, State> {
         </View>
       )
     }
-    console.log(isFormVisible)
-    console.log(typeOfCard)
-    return (
-      <View style={styles.Component2}>
-        <Component2 />
-        <TextInput
-          style={styles.textinput}
-          placeholder="First Name"
-          placeholderTextColor="#FFFFFF"
-          value={firstName}
-        />
-        <TextInput
-          style={styles.textinput}
-          placeholder="Last Name"
-          placeholderTextColor="#FFFFFF"
-          value={lastName}
-        />
-        <TextInput
-          style={styles.textinput}
-          placeholder="Credit Card"
-          placeholderTextColor="#FFFFFF"
-          value={creditCardNumber.slice(12, 16)}
-        />
-        <TextInput
-          style={styles.textinput}
-          placeholder="Type of Card"
-          placeholderTextColor="#FFFFFF"
-          value={typeOfCard}
-        />
-      </View>
-    )
+    // console.log(isFormVisible)
+    // console.log(typeOfCard)
+    if (isFormVisible && !isError) {
+      return (
+        <View style={styles.Component2}>
+          <TextInput
+            style={styles.textinput}
+            placeholder="First Name"
+            placeholderTextColor="#FFFFFF"
+            value={firstName}
+          />
+          <TextInput
+            style={styles.textinput}
+            placeholder="Last Name"
+            placeholderTextColor="#FFFFFF"
+            value={lastName}
+          />
+          <TextInput
+            style={styles.textinput}
+            placeholder="Credit Card"
+            placeholderTextColor="#FFFFFF"
+            value={creditCardNumber.slice(12, 16)}
+          />
+          <TextInput
+            style={styles.textinput}
+            placeholder="Type of Card"
+            placeholderTextColor="#FFFFFF"
+            value={typeOfCard}
+          />
+        </View>
+      )
+    }
+
+    return <View />
   }
 }
 

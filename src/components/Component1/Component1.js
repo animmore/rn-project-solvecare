@@ -39,6 +39,7 @@ export class Component1 extends Component<Props, State> {
     this.onChangeFirstName = this.onChangeFirstName.bind(this)
     this.onChangeLastName = this.onChangeLastName.bind(this)
     this.onChangeSecretQuestion = this.onChangeSecretQuestion.bind(this)
+    this.onChangeSecretAnswer = this.onChangeSecretAnswer.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
   }
 

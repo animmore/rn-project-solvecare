@@ -3,41 +3,35 @@ const cvvRegex = RegExp(/^[0-9]{3,4}$/)
 const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/)
 const firstNameRegex = RegExp(/^[A-z]{2,10}$/)
 const lastNameRegex = RegExp(/^[A-z]{2,10}$/)
-const secretQuestionRegex = RegExp(/^[a-z]{10,20}$/)
-const secretAnswerRegex = RegExp(/^[a-z]{10,20}$/)
+const secretQuestionRegex = RegExp(/^[A-z]{10,20}$/)
+const secretAnswerRegex = RegExp(/^[A-z]{10,20}$/)
 
-export const onValidation = () => {
-  const fieldValidationErrors = {...fieldValidationErrors}
-  switch (fieldValidationErrors) {
-    case 'creditCardNumber':
-      fieldValidationErrors.creditCardNumber = value.match(cardRegex) ? '' : 'invalid card number'
-      break
-    case 'cvv':
-      fieldValidationErrors.cvv = value.match(cvvRegex) ? '' : 'invalid CVV/CVC'
-      break
-    case 'expirationDate':
-      fieldValidationErrors.expirationDate = value.match(expRegex) ? '' : 'invalid MM/YY'
-      break
-    case 'firstName':
-      fieldValidationErrors.firstName = value.match(firstNameRegex) ? '' : 'invalid first name'
-      break
-    case 'lastName':
-      fieldValidationErrors.lastName = value.match(lastNameRegex) ? '' : 'invalid last name'
-      break
-    case 'secretQuestion':
-      fieldValidationErrors.secretQuestion = value.match(secretQuestionRegex)
-        ? ''
-        : 'invalid secret question'
-      break
-    case 'secretAnswer':
-      fieldValidationErrors.secretAnswer = value.match(secretAnswerRegex)
-        ? ''
-        : 'invalid secret answer'
-      break
-
-    default:
-      break
+function assert(expression, message, errors) {
+  if (!expression) {
+    errors.push(message)
   }
+}
 
-  return fieldValidationErrors
+export const onValidation = (values) => {
+  const errors = []
+
+  const {
+    creditCardNumber,
+    cvv,
+    expirationDate,
+    firstName,
+    lastName,
+    secretQuestion,
+    secretAnswer,
+  } = values
+
+  assert(creditCardNumber.match(cardRegex), 'invalid card number', errors)
+  assert(cvv.match(cvvRegex), 'invalid CVV/CVC', errors)
+  assert(expirationDate.match(expRegex), 'invalid MM/YY', errors)
+  assert(firstName.match(firstNameRegex), 'invalid first name', errors)
+  assert(lastName.match(lastNameRegex), 'invalid last name', errors)
+  assert(secretQuestion.match(secretQuestionRegex), 'invalid secret question', errors)
+  assert(secretAnswer.match(secretAnswerRegex), 'invalid secret answer', errors)
+
+  return errors[0]
 }
