@@ -1,6 +1,6 @@
 /*eslint-disable*/
 import React, {Component} from 'react'
-import {StyleSheet, View, Text, TextInput} from 'react-native'
+import {StyleSheet, View, Text, TextInput, ActivityIndicator} from 'react-native'
 
 type Props = {
   firstName: string,
@@ -35,11 +35,27 @@ export class Component2 extends Component<Props, State> {
   }
 
   render() {
-    const {firstName, lastName, creditCardNumber} = this.props
+    const {firstName, lastName, creditCardNumber, isLoading, isError} = this.props
     const {typeOfCard} = this.state
     const {isFormVisible} = this.props
-    if (!isFormVisible || (!firstName && !lastName && !creditCardNumber)) {
+    if (!isFormVisible || (!firstName && !lastName && !creditCardNumber) && isError) {
       return null
+    }
+
+    if (isError) {
+      return (
+        <View>
+          <Text>Invalid entered data</Text>
+        </View>
+      )
+    }
+
+    if (isLoading) {
+      return (
+        <View>
+          <ActivityIndicator size="large" />
+        </View>
+      )
     }
     console.log(isFormVisible)
     console.log(typeOfCard)

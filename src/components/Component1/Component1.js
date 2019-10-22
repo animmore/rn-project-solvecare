@@ -88,7 +88,6 @@ export class Component1 extends Component<Props, State> {
 
   render() {
     console.log(this.props.isFormVisible)
-
     return (
       <View style={styles.Component1} onSubmit={this.handleSubmit}>
         <Text style={styles.header}> Enter Yours Data </Text>
