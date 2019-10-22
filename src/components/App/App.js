@@ -13,7 +13,8 @@ import {
 import ContainerC1 from '../Component1/ContainerC1'
 import ContainerC2 from '../Component2/ContainerC2'
 import {Provider} from 'react-redux'
-import {createStore} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
+import thunk from 'redux-thunk'
 import {rootReducer} from '../../configs/rootReducer'
 
 // import {createAppContainer} from 'react-navigation'
@@ -21,7 +22,7 @@ import {rootReducer} from '../../configs/rootReducer'
 // import Component2 from '../Component2/Component2';
 // import Component1 from '../Component1/Component1';
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 // import ComponentList from './components/ComponentList'
 // import ProductCard from './components/ProductCard'
 
@@ -30,9 +31,6 @@ type Props = {}
 type State = {}
 
 export class App extends Component {
-  state = {
-    isFormVisible: false,
-  }
 
   render() {
     return (

@@ -5,6 +5,7 @@ import PropTypes, {bool, object, number, any} from 'prop-types'
 // import {FormErrors} from '../FormErrors'
 import {StyleSheet, View, Text, TextInput, Button, ScrollView} from 'react-native'
 import {bold} from 'ansi-colors'
+import {callApi} from '../../services/ServerService'
 
 type Props = {}
 
@@ -67,7 +68,6 @@ export class Component1 extends Component<Props, State> {
     this.props.onSubmit(value)
   }
 
-  
   handleInputChange = (name: string) => (event) => {
     const {name, value} = event.currentTarget
     this.setState({[name]: value})
@@ -77,14 +77,17 @@ export class Component1 extends Component<Props, State> {
     this.setState({typeOfCard})
   }
 
+  onValidation() {
+    this.props.showMainData()
+  }
+
   handleChange = () => {
-    this.onFormSubmit(true)
+    this.onValidation(), this.onFormSubmit(true)
+    return true
   }
 
   render() {
     console.log(this.props.isFormVisible)
-
-    let formErrors = this.state
 
     return (
       <View style={styles.Component1} onSubmit={this.handleSubmit}>
