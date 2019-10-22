@@ -10,12 +10,16 @@ import {
   setLastName,
   setSecretQuestion,
   setSecretAnswer,
+  setIsFormVisible,
 } from '../../actions/actions'
+
+import {onSubmit} from '../../actions/onSubmit'
 
 export class ContainerC1 extends Component {
   render() {
     return (
       <Component1
+        isFormVisible={this.props.isFormVisible}
         creditCardNumber={this.props.creditCardNumber}
         setCreditCardNumber={this.props.setCreditCardNumber}
         expirationDate={this.props.expirationDate}
@@ -30,6 +34,7 @@ export class ContainerC1 extends Component {
         setSecretQuestion={this.props.setSecretQuestion}
         secretAnswer={this.props.secretAnswer}
         setSecretAnswer={this.props.setSecretAnswer}
+        onSubmit={this.props.onSubmit}
       />
     )
   }
@@ -37,6 +42,7 @@ export class ContainerC1 extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    isFormVisible: state.show.isFormVisible,
     creditCardNumber: state.form.creditCardNumber,
     expirationDate: state.form.expirationDate,
     cvv: state.form.cvv,
@@ -54,6 +60,7 @@ const mapDispatchToProps = {
   setLastName,
   setSecretQuestion,
   setSecretAnswer,
+  onSubmit,
 }
 
 export default connect(

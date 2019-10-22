@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import React, {Component} from 'react'
-import Component2 from './Component2';
-import { connect } from 'react-redux';
+import Component2 from './Component2'
+import {connect} from 'react-redux'
 
 export class ContainerC2 extends Component {
   render() {
@@ -10,17 +10,18 @@ export class ContainerC2 extends Component {
         creditCardNumber={this.props.creditCardNumber}
         firstName={this.props.firstName}
         lastName={this.props.lastName}
+        isFormVisible={this.props.isFormVisible}
       />
     )
   }
 }
 const mapStateToProps = (state) => {
   return {
+    isFormVisible: state.show.isFormVisible,
     creditCardNumber: state.form.creditCardNumber,
     firstName: state.form.firstName,
     lastName: state.form.lastName,
   }
 }
 
-export default connect(mapStateToProps)(ContainerC2);
-
+export default connect(mapStateToProps)(ContainerC2)

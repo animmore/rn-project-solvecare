@@ -15,6 +15,12 @@ import ContainerC2 from '../Component2/ContainerC2'
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 import {rootReducer} from '../../configs/rootReducer'
+
+// import {createAppContainer} from 'react-navigation'
+// import {createStackNavigator} from 'react-navigation-stack'
+// import Component2 from '../Component2/Component2';
+// import Component1 from '../Component1/Component1';
+
 const store = createStore(rootReducer)
 // import ComponentList from './components/ComponentList'
 // import ProductCard from './components/ProductCard'
@@ -24,6 +30,10 @@ type Props = {}
 type State = {}
 
 export class App extends Component {
+  state = {
+    isFormVisible: false,
+  }
+
   render() {
     return (
       <Provider store={store}>
@@ -42,6 +52,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#222222',
   },
 })
+
+// const RootStack = createStackNavigator(
+//   {
+//     Home: Component1,
+//     Details: Component2,
+//   },
+//   {
+//     initialRouteName: 'Home',
+//   },
+// )
+// const AppContainer = createAppContainer(RootStack)
 
 //
 // const App: () => React$Node = () => {

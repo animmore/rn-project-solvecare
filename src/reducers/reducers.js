@@ -1,12 +1,13 @@
 import {
   SET_CREDIT_CARD_NUMBER,
-
   SET_EXPIRATION_CVV,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_SECRET_QUESTION,
   SET_SECRET_ANSWER,
+  SET_IS_FORM_VISIBLE,
 } from '../actions/actions'
+
 
 const initialValue = {
   creditCardNumber: '',
@@ -20,6 +21,10 @@ const initialValue = {
 
 export const formReducer = (state = initialValue, action) => {
   switch (action.type) {
+    // case 'ON_SUBMIT':
+    //   return {...state, isFormVisible: action.payload}
+    // case 'SET_IS_FORM_VISIBLE': 
+    //   return {...state, isFormVisible: action.payload}
     case 'SET_CREDIT_CARD_NUMBER':
       return {...state, creditCardNumber: action.payload}
     case 'SET_EXPIRATION_DATE':

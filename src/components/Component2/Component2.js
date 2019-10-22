@@ -11,59 +11,38 @@ type Props = {
 
 type State = {
   isFormVisible: boolean,
-  timerID: boolean,
-  startAt: any,
 }
 
 export class Component2 extends Component<Props, State> {
   state = {
-    isFormVisible: false,
-    timerID: false,
-    startAt: '',
+    typeOfCard: '',
   }
 
-  startTimer = () => {
-    const timerID = setTimeout(() => {
-      this.setState({
-        isFormVisible: false,
-        timerID: false,
-        startAt: '',
-      })
-    }, 5000)
+  componentDidUpdate = (prevProps: Props) => {
+    if (prevProps.creditCardNumber !== this.props.creditCardNumber) {
+      this.onTypeOfCard()
+    }
+  }
+
+  onTypeOfCard = () => {
+    const {creditCardNumber} = this.props
+    const lastNums = creditCardNumber.slice(12, 16)
+    const typeOfCard = lastNums < 2000 ? 'Visa' : 'Master Card'
 
     this.setState({
-      isFormVisible: true,
-      timerID: true,
-      startAt: Date.now(),
+      typeOfCard,
     })
   }
 
-  componentDidUpdate(prevProps: Props) {
-    if (
-      prevProps.firstName === this.props.firstName &&
-      prevProps.lastName === this.props.lastName &&
-      prevProps.creditCardNumber === this.props.creditCardNumber
-    ) {
-      return
-    }
-
-    if (!this.state.isFormVisible) {
-      return this.startTimer()
-    }
-
-    const {timerID} = this.state
-    this.startTimer()
-  }
-
   render() {
-    
-    console.log('(render) Component2')
-    const {firstName, lastName, creditCardNumber, typeOfCard} = this.props
-    const {isFormVisible} = this.state
+    const {firstName, lastName, creditCardNumber} = this.props
+    const {typeOfCard} = this.state
+    const {isFormVisible} = this.props
     if (!isFormVisible || (!firstName && !lastName && !creditCardNumber)) {
       return null
     }
-
+    console.log(isFormVisible)
+    console.log(typeOfCard)
     return (
       <View style={styles.Component2}>
         <Component2 />
@@ -71,19 +50,19 @@ export class Component2 extends Component<Props, State> {
           style={styles.textinput}
           placeholder="First Name"
           placeholderTextColor="#FFFFFF"
-          value={this.props.firstName}
+          value={firstName}
         />
         <TextInput
           style={styles.textinput}
           placeholder="Last Name"
           placeholderTextColor="#FFFFFF"
-          value={this.props.lastName}
+          value={lastName}
         />
         <TextInput
           style={styles.textinput}
           placeholder="Credit Card"
           placeholderTextColor="#FFFFFF"
-          value={this.props.creditCardNumber.slice(12, 16)}
+          value={creditCardNumber.slice(12, 16)}
         />
         <TextInput
           style={styles.textinput}

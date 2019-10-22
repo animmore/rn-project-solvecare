@@ -1,3 +1,6 @@
+import { Action } from "rxjs/internal/scheduler/Action";
+import { statement } from "@babel/template";
+
 /*eslint-disable*/
 
 export const SET_CREDIT_CARD_NUMBER = 'SET_CREDIT_CARD_NUMBER'
@@ -7,6 +10,13 @@ export const SET_FIRST_NAME = 'SET_FIRST_NAME'
 export const SET_LAST_NAME = 'SET_LAST_NAME'
 export const SET_SECRET_QUESTION = 'SET_SECRET_QUESTION'
 export const SET_SECRET_ANSWER = 'SET_SECRET_ANSWER'
+
+export const SET_IS_FORM_VISIBLE = 'SET_IS_FORM_VISIBLE'
+
+export const setIsFormVisible = (isFormVisible) => ({
+  type: SET_IS_FORM_VISIBLE,
+  payload: isFormVisible,
+})
 
 export const setCreditCardNumber = (creditCardNumber) => ({
   type: SET_CREDIT_CARD_NUMBER,

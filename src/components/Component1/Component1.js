@@ -3,17 +3,12 @@ import React, {Component} from 'react'
 import Component3 from '../Component3/Component3'
 import PropTypes, {bool, object, number, any} from 'prop-types'
 // import {FormErrors} from '../FormErrors'
-import {StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView} from 'react-native'
+import {StyleSheet, View, Text, TextInput, Button, ScrollView} from 'react-native'
 import {bold} from 'ansi-colors'
-// import {callAPI} from '../../server/CallAPI'
 
 type Props = {}
 
-type State = {|
-  fieldValidationErrors: object,
-  formValid: any,
-  formErrors: object,
-|}
+type State = {}
 
 const cardRegex = RegExp(/^[0-9]{16}$/)
 const cvvRegex = RegExp(/^[0-9]{3,4}$/)
@@ -24,18 +19,16 @@ export class Component1 extends Component<Props, State> {
     super()
 
     state = {
-      submitFormVisible: false,
-
-      formValid: object,
+      formValid: false,
       fieldValidationErrors: '',
       formErrors: {
-        creditCardNumber: '',
-        cvv: '',
-        expirationDate: '',
-        firstName: '',
-        lastName: '',
-        secretQuestion: '',
-        secretAnswer: '',
+        creditCardNumber: true,
+        expirationDate: true,
+        cvv: true,
+        firstName: true,
+        lastName: true,
+        secretQuestion: true,
+        secretAnswer: true,
       },
     }
 
@@ -45,7 +38,7 @@ export class Component1 extends Component<Props, State> {
     this.onChangeFirstName = this.onChangeFirstName.bind(this)
     this.onChangeLastName = this.onChangeLastName.bind(this)
     this.onChangeSecretQuestion = this.onChangeSecretQuestion.bind(this)
-    this.onChangeSecretAnswer = this.onChangeSecretAnswer.bind(this)
+    this.onFormSubmit = this.onFormSubmit.bind(this)
   }
 
   onChangeCreditCardNumber(value) {
@@ -70,80 +63,31 @@ export class Component1 extends Component<Props, State> {
   onChangeSecretAnswer(value) {
     this.props.setSecretAnswer(value)
   }
-
-  // validateForm() {
-  //   this.setState({
-  //     formValid:
-  //       this.state.formErrors.creditCardNumber &&
-  //       this.state.formErrors.cvv &&
-  //       this.state.formErrors.expirationDate &&
-  //       this.state.formErrors.firstName &&
-  //       this.state.formErrors.lastName &&
-  //       this.state.formErrors.secretQuestion &&
-  //       this.state.formErrors.secretAnswer,
-  //   })
-  // }
-  handleInputChange = (name: string) => (event) => {
-    const {name, value} = event.currentTarget
-    this.setState({[name]: value} /*, () => {
-      this.validateField(name, value)
-    }*/)
+  onFormSubmit(value) {
+    this.props.onSubmit(value)
   }
 
-  // validateField(fieldName: string, value: string) {
-  //   const fieldValidationErrors = this.state.formErrors
-  //   const {creditCardNumber} = this.state
-  //   const {cvv} = this.state
-  //   const {expirationDate} = this.state
-  //   const {firstName} = this.state
-  //   const {lastName} = this.state
-  //   const {secretQuestion} = this.state
-  //   const {secretAnswer} = this.state
-
-  //   switch (fieldName) {
-  //     case 'creditCardNumber':
-  //       fieldValidationErrors.creditCardNumber = value.match(cardRegex) ? '' : 'invalid card number'
-  //       break
-
-  //     case 'cvv':
-  //       fieldValidationErrors.cvv = value.match(cvvRegex) ? '' : 'invalid CVV/CVC'
-  //       break
-  //     case 'expirationDate':
-  //       fieldValidationErrors.expirationDate = value.match(expRegex) ? '' : 'invalid MM/YY'
-  //       break
-  //     case 'firstName':
-  //       fieldValidationErrors.firstName = value.length < 3 ? 'minimum 3 characaters required' : ''
-  //       break
-  //     case 'lastName':
-  //       fieldValidationErrors.lastName = value.length < 2 ? 'minimum 3 characaters required' : ''
-  //       break
-  //     case 'secretQuestion':
-  //       fieldValidationErrors.secretQuestion =
-  //         value.length < 9 ? 'minimum 10 characaters required' : ''
-  //       break
-  //     case 'secretAnswer':
-  //       fieldValidationErrors.secretAnswer =
-  //         value.length < 3 ? 'minimum 4 characaters required' : ''
-  //       break
-
-  //     default:
-  //       break
-  //   }
-
-  //   this.setState({fieldValidationErrors, [fieldName]: value}, () => console.log(this.state))
-  // }
+  
+  handleInputChange = (name: string) => (event) => {
+    const {name, value} = event.currentTarget
+    this.setState({[name]: value})
+  }
 
   handleTypeOfCardChange = (typeOfCard: string) => {
     this.setState({typeOfCard})
   }
 
-  // callAPI(values).then((data) => console.log(data))
+  handleChange = () => {
+    this.onFormSubmit(true)
+  }
 
   render() {
-    console.log('(render) Component1')
-    // const {fieldValidationErrors, creditCardNumber} = this.state
+    console.log(this.props.isFormVisible)
+
+    let formErrors = this.state
+
     return (
-      <View style={styles.Component1}>
+      <View style={styles.Component1} onSubmit={this.handleSubmit}>
         <Text style={styles.header}> Enter Yours Data </Text>
 
         <TextInput
@@ -203,15 +147,7 @@ export class Component1 extends Component<Props, State> {
           value={this.props.secretAnswer}
         />
 
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.btntext}>SUBMIT</Text>
-        </TouchableOpacity>
-        <View>
-          <Component3
-            onTypeOfCard={this.handleTypeOfCardChange}
-            creditCardNumber={this.props.creditCardNumber}
-          />
-        </View>
+        <Button style={styles.button} title="SUBMIT" onPress={this.handleChange} />
       </View>
     )
   }
