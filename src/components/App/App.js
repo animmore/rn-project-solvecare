@@ -43,22 +43,13 @@ const styles = StyleSheet.create({
   },
 })
 
-// const RootStack = createStackNavigator(
-//   {
-//     Home: Component1,
-//     Details: Component2,
-//   },
-//   {
-//     initialRouteName: 'Home',
-//   },
-// )
-// const AppContainer = createAppContainer(RootStack)
 
-//
+// ComponentList
 // const App: () => React$Node = () => {
 //    return <ComponentList />
 //  }
 
+// ProductCard
 // export class App extends Component {
 //   render() {
 //     return (

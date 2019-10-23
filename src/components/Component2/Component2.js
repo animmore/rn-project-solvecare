@@ -1,4 +1,4 @@
-/*eslint-disable*/
+//@flow
 import React, {Component} from 'react'
 import {StyleSheet, View, Text, TextInput, ActivityIndicator} from 'react-native'
 
@@ -6,11 +6,15 @@ type Props = {
   firstName: string,
   lastName: string,
   creditCardNumber: string,
-  typeOfCard: string,
+  typeOfCard: any,
+
+  isLoading: boolean,
+  isError: boolean,
+  isFormVisible: boolean,
 }
 
 type State = {
-  isFormVisible: boolean,
+  typeOfCard: string,
 }
 
 export class Component2 extends Component<Props, State> {
@@ -42,7 +46,9 @@ export class Component2 extends Component<Props, State> {
     if (isError) {
       return (
         <View style={styles.err}>
-          <Text style={styles.errMessage}>Invalid entered data!</Text>
+          <Text style={styles.errMessage}>
+            You have entered invalid data. {'\n'} Please, try again!
+          </Text>
         </View>
       )
     }

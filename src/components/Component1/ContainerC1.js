@@ -1,4 +1,5 @@
-/*eslint-disable*/
+//@flow
+
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Component1 from './Component1'
@@ -16,7 +17,31 @@ import {
 import {onSubmit} from '../../actions/onSubmit'
 import {showMainData} from '../../actions/cardMainData'
 
-export class ContainerC1 extends Component {
+type Props = {
+  isError: boolean,
+  creditCardNumber: string,
+  expirationDate: string,
+  cvv: string,
+  firstName: string,
+  lastName: string,
+  secretQuestion: string,
+  secretAnswer: string,
+  isFormVisible: boolean,
+
+  setCreditCardNumber: (value: string) => void,
+  setCvv: (value: string) => void,
+  setExpirationDate: (value: string) => void,
+  setFirstName: (value: string) => void,
+  setLastName: (value: string) => void,
+  setSecretQuestion: (value: string) => void,
+  setSecretAnswer: (value: string) => void,
+  onSubmit: (value: any) => void,
+  showMainData: () => void,
+}
+
+type State = {}
+
+export class ContainerC1 extends Component<Props, State> {
   render() {
     return (
       <Component1

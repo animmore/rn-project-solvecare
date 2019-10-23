@@ -49,5 +49,4 @@ export class Component3 extends React.PureComponent<Props, State> {
   }
 }
 
-
 export default Component3

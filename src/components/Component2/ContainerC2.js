@@ -1,10 +1,23 @@
-/*eslint-disable*/
+//@flow
+
 import React, {Component} from 'react'
 import Component2 from './Component2'
 import {connect} from 'react-redux'
 import {RequestStatus} from '../../utils/RequestStatus'
 
-export class ContainerC2 extends Component {
+type Props = {
+  firstName: string,
+  lastName: string,
+  creditCardNumber: string,
+
+  isLoading: boolean,
+  isError: boolean,
+  isFormVisible: boolean,
+}
+
+type State = {}
+
+export class ContainerC2 extends Component<Props, State> {
   render() {
     return (
       <Component2

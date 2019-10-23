@@ -10,7 +10,7 @@ export const showMainData = () => (dispatch, getState) => {
   const values = state.setData
 
   new ServerService()
-    .callServerValidation(values)
+    .validateCardData(values)
     .then((data) => {
       dispatch({type: SHOW_CARD_MAIN_DATA_SUCCESS, payload: data})
     })

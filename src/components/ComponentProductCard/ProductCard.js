@@ -67,7 +67,6 @@ export class ProductCard extends Component {
               <Picker.Item label="China" value="China" />
             </Picker>
           </View>
-
         </View>
       </View>
     )

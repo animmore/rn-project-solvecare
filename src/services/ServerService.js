@@ -8,16 +8,16 @@ const callApi = (values) => {
       error ? reject(error) : resolve()
     }
 
-    setTimeout(sendResponse, 500)
+    setTimeout(sendResponse, 2000)
   })
 }
 
-const onServerValidation = (values) => {
+const onServerValidation = (values) => { 
   return callApi(values)
 }
 
 class ServerService {
-  callServerValidation(values) {
+  validateCardData(values) {
     return onServerValidation(values)
   }
 }

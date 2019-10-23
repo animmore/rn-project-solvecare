@@ -1,13 +1,35 @@
-/*eslint-disable*/
+//@flow
+
 import React, {Component} from 'react'
 import Component3 from '../Component3/Component3'
 import PropTypes, {bool, object, number, any} from 'prop-types'
-// import {FormErrors} from '../FormErrors'
 import {StyleSheet, View, Text, TextInput, Button, ScrollView} from 'react-native'
 import {bold} from 'ansi-colors'
 import {callApi} from '../../services/ServerService'
 
-type Props = {}
+type Props = {
+  isError: boolean,
+  isFormVisible: boolean,
+  creditCardNumber: string,
+  expirationDate: string,
+  cvv: string,
+  firstName: string,
+  lastName: string,
+  secretQuestion: string,
+  secretAnswer: string,
+
+  showMainData: () => void,
+  onValidation: () => void,
+  onFormSubmit: (value: boolean) => void,
+  onSubmit: (value: any) => void,
+  setCreditCardNumber: (value: string) => void,
+  setCvv: (value: string) => void,
+  setExpirationDate: (value: string) => void,
+  setFirstName: (value: string) => void,
+  setLastName: (value: string) => void,
+  setSecretQuestion: (value: string) => void,
+  setSecretAnswer: (value: string) => void,
+}
 
 type State = {}
 
@@ -18,21 +40,6 @@ const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/)
 export class Component1 extends Component<Props, State> {
   constructor() {
     super()
-
-    state = {
-      formValid: false,
-      fieldValidationErrors: '',
-      formErrors: {
-        creditCardNumber: true,
-        expirationDate: true,
-        cvv: true,
-        firstName: true,
-        lastName: true,
-        secretQuestion: true,
-        secretAnswer: true,
-      },
-    }
-
     this.onChangeCreditCardNumber = this.onChangeCreditCardNumber.bind(this)
     this.onChangeCvv = this.onChangeCvv.bind(this)
     this.onChangeExpirationDate = this.onChangeExpirationDate.bind(this)
@@ -42,40 +49,43 @@ export class Component1 extends Component<Props, State> {
     this.onChangeSecretAnswer = this.onChangeSecretAnswer.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
   }
-
-  onChangeCreditCardNumber(value) {
+  onChangeCreditCardNumber: () => void
+  onChangeCreditCardNumber(value: string) {
     this.props.setCreditCardNumber(value)
   }
-  onChangeCvv(value) {
+  onChangeCvv: () => void
+  onChangeCvv(value: string) {
     this.props.setCvv(value)
   }
-  onChangeExpirationDate(value) {
+  onChangeExpirationDate: () => void
+  onChangeExpirationDate(value: string) {
     this.props.setExpirationDate(value)
   }
-  onChangeFirstName(value) {
+  onChangeFirstName: () => void
+  onChangeFirstName(value: string) {
     this.props.setFirstName(value)
   }
-  onChangeLastName(value) {
+  onChangeLastName: () => void
+  onChangeLastName(value: string) {
     this.props.setLastName(value)
   }
-
-  onChangeSecretQuestion(value) {
+  onChangeSecretQuestion: () => void
+  onChangeSecretQuestion(value: string) {
     this.props.setSecretQuestion(value)
   }
-  onChangeSecretAnswer(value) {
+  onChangeSecretAnswer: () => void
+  onChangeSecretAnswer(value: string) {
     this.props.setSecretAnswer(value)
   }
-  onFormSubmit(value) {
+
+  onFormSubmit: (value: boolean) => void
+  onFormSubmit(value: boolean) {
     this.props.onSubmit(value)
   }
 
-  handleInputChange = (name: string) => (event) => {
+  handleInputChange = (name: string) => (event: SyntheticEvent<HTMLInputElement>) => {
     const {name, value} = event.currentTarget
     this.setState({[name]: value})
-  }
-
-  handleTypeOfCardChange = (typeOfCard: string) => {
-    this.setState({typeOfCard})
   }
 
   onValidation() {
@@ -90,7 +100,7 @@ export class Component1 extends Component<Props, State> {
   render() {
     console.log(this.props.isFormVisible)
     return (
-      <View style={styles.Component1} onSubmit={this.handleSubmit}>
+      <View style={styles.Component1}>
         <Text style={styles.header}> Enter Yours Data </Text>
 
         <TextInput
