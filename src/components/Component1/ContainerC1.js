@@ -52,7 +52,7 @@ const mapStateToProps = (state) => {
     secretQuestion: state.form.secretQuestion,
     secretAnswer: state.form.secretAnswer,
     isFormVisible: state.show.isFormVisible,
-    isFormSubmit: state.main.isFormSubmit,
+    isFormSubmit: state.cardInfo.isFormSubmit,
   }
 }
 

@@ -41,8 +41,8 @@ export class Component2 extends Component<Props, State> {
 
     if (isError) {
       return (
-        <View>
-          <Text>Invalid entered data</Text>
+        <View style={styles.err}>
+          <Text style={styles.errMessage}>Invalid entered data!</Text>
         </View>
       )
     }
@@ -105,6 +105,14 @@ const styles = StyleSheet.create({
     borderBottomColor: '#f8f8f8',
     borderBottomWidth: 1,
     textAlign: 'center',
+  },
+  err: {
+    marginTop: 50,
+  }, 
+  errMessage: {
+    fontSize: 22,
+    textAlign: 'center',
+    color: 'red',
   },
 })
 

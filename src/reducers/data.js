@@ -19,12 +19,9 @@ const initialValue = {
   secretAnswer: '',
 }
 
-export const formReducer = (state = initialValue, action) => {
+export const data = (state = initialValue, action) => {
   switch (action.type) {
-    // case 'ON_SUBMIT':
-    //   return {...state, isFormVisible: action.payload}
-    // case 'SET_IS_FORM_VISIBLE': 
-    //   return {...state, isFormVisible: action.payload}
+
     case 'SET_CREDIT_CARD_NUMBER':
       return {...state, creditCardNumber: action.payload}
     case 'SET_EXPIRATION_DATE':

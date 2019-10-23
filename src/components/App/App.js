@@ -13,16 +13,8 @@ import {
 import ContainerC1 from '../Component1/ContainerC1'
 import ContainerC2 from '../Component2/ContainerC2'
 import {Provider} from 'react-redux'
-import {createStore, applyMiddleware} from 'redux'
-import thunk from 'redux-thunk'
-import {rootReducer} from '../../configs/rootReducer'
+import {store} from '../../configs/createStore'
 
-// import {createAppContainer} from 'react-navigation'
-// import {createStackNavigator} from 'react-navigation-stack'
-// import Component2 from '../Component2/Component2';
-// import Component1 from '../Component1/Component1';
-
-const store = createStore(rootReducer, applyMiddleware(thunk))
 // import ComponentList from './components/ComponentList'
 // import ProductCard from './components/ProductCard'
 

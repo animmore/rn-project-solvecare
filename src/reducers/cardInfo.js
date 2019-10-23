@@ -11,7 +11,7 @@ const initialValue = {
   isFormSubmit: false,
 }
 
-export const formMainData = (state = initialValue, action) => {
+export const cardInfo = (state = initialValue, action) => {
   switch (action.type) {
     case SHOW_CARD_MAIN_DATA_REQUEST:
       return {

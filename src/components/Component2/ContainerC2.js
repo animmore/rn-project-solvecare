@@ -21,11 +21,11 @@ export class ContainerC2 extends Component {
 const mapStateToProps = (state, props) => {
   return {
     isFormVisible: state.show.isFormVisible,
-    creditCardNumber: state.form.creditCardNumber,
+    creditCardNumber: state.cardInfo.creditCardNumber,
     firstName: state.form.firstName,
     lastName: state.form.lastName,
-    isLoading: state.main.requestStatus === RequestStatus.Request,
-    isError: state.main.requestStatus === RequestStatus.Failure,
+    isLoading: state.cardInfo.requestStatus === RequestStatus.Request,
+    isError: state.cardInfo.requestStatus === RequestStatus.Failure,
   }
 }
 

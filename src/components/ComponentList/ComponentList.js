@@ -76,7 +76,7 @@ import {FlatList, StyleSheet, Text, View, ActivityIndicator, Image} from 'react-
 export class ComponentList extends Component {
   state = {
     data: [],
-    isLoading: true,
+    // isLoading: true,
   }
 
   componentWillMount() {

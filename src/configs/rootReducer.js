@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux'
-import {formReducer} from '../reducers/reducers'
+import {data} from '../reducers/data'
 import {onSubmitReducer} from '../reducers/onSubmitReducer'
-import {formMainData} from '../reducers/cardMainDataReducer'
+import {cardInfo} from '../reducers/cardInfo'
 export const rootReducer = combineReducers({
-  form: formReducer,
+  form: data,
   show: onSubmitReducer,
-  main: formMainData,
+  cardInfo,
 })
