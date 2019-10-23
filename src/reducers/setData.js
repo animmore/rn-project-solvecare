@@ -8,7 +8,6 @@ import {
   SET_IS_FORM_VISIBLE,
 } from '../actions/actions'
 
-
 const initialValue = {
   creditCardNumber: '',
   expirationDate: '',
@@ -19,9 +18,8 @@ const initialValue = {
   secretAnswer: '',
 }
 
-export const data = (state = initialValue, action) => {
+export const setData = (state = initialValue, action) => {
   switch (action.type) {
-
     case 'SET_CREDIT_CARD_NUMBER':
       return {...state, creditCardNumber: action.payload}
     case 'SET_EXPIRATION_DATE':

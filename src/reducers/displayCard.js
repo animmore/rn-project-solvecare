@@ -2,7 +2,7 @@ const initialValue = {
   isFormVisible: false,
 }
 
-export const onSubmitReducer = (state = initialValue, action) => {
+export const displayCard = (state = initialValue, action) => {
   switch (action.type) {
     case 'ON_SUBMIT':
       return {

@@ -20,10 +20,10 @@ export class ContainerC2 extends Component {
 }
 const mapStateToProps = (state, props) => {
   return {
-    isFormVisible: state.show.isFormVisible,
-    creditCardNumber: state.cardInfo.creditCardNumber,
-    firstName: state.form.firstName,
-    lastName: state.form.lastName,
+    isFormVisible: state.displayCard.isFormVisible,
+    creditCardNumber: state.setData.creditCardNumber,
+    firstName: state.setData.firstName,
+    lastName: state.setData.lastName,
     isLoading: state.cardInfo.requestStatus === RequestStatus.Request,
     isError: state.cardInfo.requestStatus === RequestStatus.Failure,
   }

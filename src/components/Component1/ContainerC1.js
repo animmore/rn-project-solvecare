@@ -44,14 +44,14 @@ export class ContainerC1 extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    creditCardNumber: state.form.creditCardNumber,
-    expirationDate: state.form.expirationDate,
-    cvv: state.form.cvv,
-    firstName: state.form.firstName,
-    lastName: state.form.lastName,
-    secretQuestion: state.form.secretQuestion,
-    secretAnswer: state.form.secretAnswer,
-    isFormVisible: state.show.isFormVisible,
+    creditCardNumber: state.setData.creditCardNumber,
+    expirationDate: state.setData.expirationDate,
+    cvv: state.setData.cvv,
+    firstName: state.setData.firstName,
+    lastName: state.setData.lastName,
+    secretQuestion: state.setData.secretQuestion,
+    secretAnswer: state.setData.secretAnswer,
+    isFormVisible: state.displayCard.isFormVisible,
     isFormSubmit: state.cardInfo.isFormSubmit,
   }
 }

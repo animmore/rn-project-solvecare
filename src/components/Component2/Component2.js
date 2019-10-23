@@ -54,8 +54,7 @@ export class Component2 extends Component<Props, State> {
         </View>
       )
     }
-    // console.log(isFormVisible)
-    // console.log(typeOfCard)
+
     if (isFormVisible && !isError) {
       return (
         <View style={styles.Component2}>
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
   },
   err: {
     marginTop: 50,
-  }, 
+  },
   errMessage: {
     fontSize: 22,
     textAlign: 'center',
