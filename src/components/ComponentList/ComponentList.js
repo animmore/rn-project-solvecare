@@ -29,7 +29,7 @@ export class ComponentList extends Component<Props, State> {
       <View style={styles.container}>
         <FlatList
           data={this.state.data}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, email) => email}
           renderItem={({item, index}) => (
             <View style={{flex: 1, flexDirection: 'row'}}>
               <Image source={{uri: item.picture.large}} style={styles.images} />

@@ -1,3 +1,4 @@
+//@flow
 /*eslint-disable*/
 import React, {Component} from 'react'
 import {
@@ -15,14 +16,14 @@ import ContainerC2 from '../Component2/ContainerC2'
 import {Provider} from 'react-redux'
 import {store} from '../../configs/createStore'
 
-// import ComponentList from './components/ComponentList'
+import ComponentList from '../ComponentList/ComponentList'
 // import ProductCard from './components/ProductCard'
 
 type Props = {}
 
 type State = {}
 
-export class App extends Component {
+export class App extends Component<Props, State> {
 
   render() {
     return (
