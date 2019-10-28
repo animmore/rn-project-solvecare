@@ -19,36 +19,35 @@ import {store} from '../../configs/createStore'
 import ComponentList from '../ComponentList/ComponentList'
 // import ProductCard from './components/ProductCard'
 
-type Props = {}
+// type Props = {}
 
-type State = {}
+// type State = {}
 
-export class App extends Component<Props, State> {
+// export class App extends Component<Props, State> {
 
-  render() {
-    return (
-      <Provider store={store}>
-        <ScrollView style={styles.container}>
-          <ContainerC1 />
-          <ContainerC2 />
-        </ScrollView>
-      </Provider>
-    )
-  }
+//   render() {
+//     return (
+//       <Provider store={store}>
+//         <ScrollView style={styles.container}>
+//           <ContainerC1 />
+//           <ContainerC2 />
+//         </ScrollView>
+//       </Provider>
+//     )
+//   }
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#222222',
+//   },
+// })
+
+ComponentList
+const App: () => React$Node = () => {
+  return <ComponentList />
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#222222',
-  },
-})
-
-
-// ComponentList
-// const App: () => React$Node = () => {
-//    return <ComponentList />
-//  }
 
 // ProductCard
 // export class App extends Component {

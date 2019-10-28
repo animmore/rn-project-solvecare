@@ -49,10 +49,12 @@ export class Component1 extends Component<Props, State> {
     this.onChangeSecretAnswer = this.onChangeSecretAnswer.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
   }
+
   onChangeCreditCardNumber: () => void
   onChangeCreditCardNumber(value: string) {
     this.props.setCreditCardNumber(value)
   }
+
   onChangeCvv: () => void
   onChangeCvv(value: string) {
     this.props.setCvv(value)
@@ -210,3 +212,5 @@ const styles = StyleSheet.create({
 })
 
 export default Component1
+
+

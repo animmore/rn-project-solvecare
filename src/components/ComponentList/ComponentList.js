@@ -1,7 +1,15 @@
-//@flow
-
+// @flow
 import React, {Component} from 'react'
-import {FlatList, StyleSheet, Text, View, ActivityIndicator, Image} from 'react-native'
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator,
+  TextInput,
+  Image,
+  Button,
+} from 'react-native'
 
 type Props = {}
 
@@ -12,6 +20,15 @@ type State = {
 export class ComponentList extends Component<Props, State> {
   state = {
     data: [],
+    text: '',
+  }
+
+  addItem = () => {}
+
+  removeItem = () => {}
+
+  handleInputChange = (name) => {
+    return (value) => this.setState({[name]: value})
   }
 
   componentDidMount() {
@@ -19,7 +36,7 @@ export class ComponentList extends Component<Props, State> {
   }
 
   fetchData = async () => {
-    const response = await fetch('https://randomuser.me/api?results=500')
+    const response = await fetch('https://randomuser.me/api?results=15')
     const json = await response.json()
     this.setState({data: json.results})
   }
@@ -29,7 +46,7 @@ export class ComponentList extends Component<Props, State> {
       <View style={styles.container}>
         <FlatList
           data={this.state.data}
-          keyExtractor={(item, email) => email}
+          keyExtractor={(item, index) => `${index}`}
           renderItem={({item, index}) => (
             <View style={{flex: 1, flexDirection: 'row'}}>
               <Image source={{uri: item.picture.large}} style={styles.images} />
@@ -38,6 +55,13 @@ export class ComponentList extends Component<Props, State> {
             </View>
           )}
         />
+        <TextInput
+          placeholder="Type something..."
+          style={styles.addInput}
+          onChangeText={this.handleInputChange}
+        />
+        <Button title="Add" onPress={this.addItem} />
+        <Button title="Delete" onPress={this.removeItem} />
       </View>
     )
   }
@@ -50,6 +74,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fafa6e',
+  },
+  addInput: {
+    width: '70%',
+    fontSize: 22,
+  },
+  containerBtn: {
+    flex: 1,
+    marginBottom: 50,
   },
   images: {
     width: '50%',
