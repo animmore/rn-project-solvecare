@@ -2,7 +2,7 @@ import {
   SHOW_CARD_MAIN_DATA_REQUEST,
   SHOW_CARD_MAIN_DATA_SUCCESS,
   SHOW_CARD_MAIN_DATA_FAILURE,
-} from '../actions/cardMainData'
+} from '../actions/showMainData'
 
 import {RequestStatus} from '../utils/RequestStatus'
 

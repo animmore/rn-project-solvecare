@@ -8,7 +8,7 @@ const callApi = (values) => {
       error ? reject(error) : resolve()
     }
 
-    setTimeout(sendResponse, 2000)
+    setTimeout(sendResponse, 200)
   })
 }
 

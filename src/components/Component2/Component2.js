@@ -39,6 +39,7 @@ export class Component2 extends Component<Props, State> {
   }
 
   render() {
+    
     const {firstName, lastName, creditCardNumber, isLoading, isError} = this.props
     const {typeOfCard} = this.state
     const {isFormVisible} = this.props

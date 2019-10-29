@@ -20,15 +20,14 @@ type State = {
 export class ComponentList extends Component<Props, State> {
   state = {
     data: [],
-    text: '',
   }
 
   addItem = () => {}
 
   removeItem = () => {}
 
-  handleInputChange = (name) => {
-    return (value) => this.setState({[name]: value})
+  handleInputChange = (name: string) => {
+    return (value: string) => this.setState({[name]: value})
   }
 
   componentDidMount() {

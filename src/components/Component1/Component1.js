@@ -33,51 +33,42 @@ type Props = {
 
 type State = {}
 
-const cardRegex = RegExp(/^[0-9]{16}$/)
-const cvvRegex = RegExp(/^[0-9]{3,4}$/)
-const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/)
-
 export class Component1 extends Component<Props, State> {
   constructor() {
     super()
-    this.onChangeCreditCardNumber = this.onChangeCreditCardNumber.bind(this)
-    this.onChangeCvv = this.onChangeCvv.bind(this)
-    this.onChangeExpirationDate = this.onChangeExpirationDate.bind(this)
-    this.onChangeFirstName = this.onChangeFirstName.bind(this)
-    this.onChangeLastName = this.onChangeLastName.bind(this)
-    this.onChangeSecretQuestion = this.onChangeSecretQuestion.bind(this)
-    this.onChangeSecretAnswer = this.onChangeSecretAnswer.bind(this)
+    this.state = {
+      creditCardNumber: '',
+      cvv: '',
+      expirationDate: '',
+      firstName: '',
+      lastName: '',
+      secretQuestion: '',
+      secretAnswer: '',
+    }
+    this.handleCardInfo = this.handleCardInfo.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
   }
 
-  onChangeCreditCardNumber: () => void
-  onChangeCreditCardNumber(value: string) {
-    this.props.setCreditCardNumber(value)
-  }
+  handleCardInfo = () => {
+    const {
+      creditCardNumber,
+      cvv,
+      expirationDate,
+      firstName,
+      lastName,
+      secretQuestion,
+      secretAnswer,
+    } = this.state
 
-  onChangeCvv: () => void
-  onChangeCvv(value: string) {
-    this.props.setCvv(value)
-  }
-  onChangeExpirationDate: () => void
-  onChangeExpirationDate(value: string) {
-    this.props.setExpirationDate(value)
-  }
-  onChangeFirstName: () => void
-  onChangeFirstName(value: string) {
-    this.props.setFirstName(value)
-  }
-  onChangeLastName: () => void
-  onChangeLastName(value: string) {
-    this.props.setLastName(value)
-  }
-  onChangeSecretQuestion: () => void
-  onChangeSecretQuestion(value: string) {
-    this.props.setSecretQuestion(value)
-  }
-  onChangeSecretAnswer: () => void
-  onChangeSecretAnswer(value: string) {
-    this.props.setSecretAnswer(value)
+    this.props.setCardData(
+      creditCardNumber,
+      cvv,
+      expirationDate,
+      firstName,
+      lastName,
+      secretQuestion,
+      secretAnswer,
+    )
   }
 
   onFormSubmit: (value: boolean) => void
@@ -109,8 +100,7 @@ export class Component1 extends Component<Props, State> {
           style={styles.textinput}
           placeholder="0000 0000 0000 0000"
           placeholderTextColor="#FFFFFF"
-          onChangeText={this.onChangeCreditCardNumber}
-          value={this.props.creditCardNumber}
+          onChangeText={this.handleInputChange}
         />
 
         <View style={styles.cont}>
@@ -118,15 +108,13 @@ export class Component1 extends Component<Props, State> {
             style={styles.textinput}
             placeholder="CVV/CVC"
             placeholderTextColor="#FFFFFF"
-            onChangeText={this.onChangeCvv}
-            value={this.props.cvv}
+            onChangeText={this.handleInputChange}
           />
           <TextInput
             style={styles.textinput}
             placeholder="MM/YY"
             placeholderTextColor="#FFFFFF"
-            onChangeText={this.onChangeExpirationDate}
-            value={this.props.expirationDate}
+            onChangeText={this.handleInputChange}
           />
         </View>
 
@@ -135,15 +123,13 @@ export class Component1 extends Component<Props, State> {
             style={styles.textinput}
             placeholder="Your name"
             placeholderTextColor="#FFFFFF"
-            onChangeText={this.onChangeFirstName}
-            value={this.props.firstName}
+            onChangeText={this.handleInputChange}
           />
           <TextInput
             style={styles.textinput}
             placeholder="Your surname"
             placeholderTextColor="#FFFFFF"
-            onChangeText={this.onChangeLastName}
-            value={this.props.lastName}
+            onChangeText={this.handleInputChange}
           />
         </View>
 
@@ -151,15 +137,13 @@ export class Component1 extends Component<Props, State> {
           style={styles.textinput}
           placeholder="Your secret question"
           placeholderTextColor="#FFFFFF"
-          onChangeText={this.onChangeSecretQuestion}
-          value={this.props.secretQuestion}
+          onChangeText={this.handleInputChange}
         />
         <TextInput
           style={styles.textinput}
           placeholder="Your secret answer"
           placeholderTextColor="#FFFFFF"
-          onChangeText={this.onChangeSecretAnswer}
-          value={this.props.secretAnswer}
+          onChangeText={this.handleInputChange}
         />
 
         <Button style={styles.button} title="SUBMIT" onPress={this.handleChange} />
@@ -212,5 +196,3 @@ const styles = StyleSheet.create({
 })
 
 export default Component1
-
-

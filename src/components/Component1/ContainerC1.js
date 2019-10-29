@@ -3,19 +3,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Component1 from './Component1'
-import {
-  setCreditCardNumber,
-  setExpirationDate,
-  setCvv,
-  setFirstName,
-  setLastName,
-  setSecretQuestion,
-  setSecretAnswer,
-  setIsFormVisible,
-} from '../../actions/actions'
-
+import {setCardData, setIsFormVisible} from '../../actions/actions'
 import {onSubmit} from '../../actions/onSubmit'
-import {showMainData} from '../../actions/cardMainData'
+import {showMainData} from '../../actions/showMainData'
 
 type Props = {
   isError: boolean,
@@ -28,13 +18,6 @@ type Props = {
   secretAnswer: string,
   isFormVisible: boolean,
 
-  setCreditCardNumber: (value: string) => void,
-  setCvv: (value: string) => void,
-  setExpirationDate: (value: string) => void,
-  setFirstName: (value: string) => void,
-  setLastName: (value: string) => void,
-  setSecretQuestion: (value: string) => void,
-  setSecretAnswer: (value: string) => void,
   onSubmit: (value: any) => void,
   showMainData: () => void,
 }
@@ -46,19 +29,12 @@ export class ContainerC1 extends Component<Props, State> {
     return (
       <Component1
         creditCardNumber={this.props.creditCardNumber}
-        setCreditCardNumber={this.props.setCreditCardNumber}
         expirationDate={this.props.expirationDate}
-        setExpirationDate={this.props.setExpirationDate}
         cvv={this.props.cvv}
-        setCvv={this.props.setCvv}
         firstName={this.props.firstName}
-        setFirstName={this.props.setFirstName}
         lastName={this.props.lastName}
-        setLastName={this.props.setLastName}
         secretQuestion={this.props.secretQuestion}
-        setSecretQuestion={this.props.setSecretQuestion}
         secretAnswer={this.props.secretAnswer}
-        setSecretAnswer={this.props.setSecretAnswer}
         isFormVisible={this.props.isFormVisible}
         onSubmit={this.props.onSubmit}
         showMainData={this.props.showMainData}
@@ -82,13 +58,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  setCreditCardNumber,
-  setExpirationDate,
-  setCvv,
-  setFirstName,
-  setLastName,
-  setSecretQuestion,
-  setSecretAnswer,
+  setCardData,
   onSubmit,
   showMainData,
 }
