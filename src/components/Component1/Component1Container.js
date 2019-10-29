@@ -1,5 +1,3 @@
-//@flow
-
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Component1 from './Component1'
@@ -18,6 +16,16 @@ type Props = {
   secretAnswer: string,
   isFormVisible: boolean,
 
+  setCardData: (
+    creditCardNumber: string,
+    cvv: string,
+    expirationDate: string,
+    firstName: string,
+    lastName: string,
+    secretQuestion: string,
+    secretAnswer: string,
+  ) => void,
+  
   onSubmit: (value: any) => void,
   showMainData: () => void,
 }

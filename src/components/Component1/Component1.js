@@ -1,4 +1,3 @@
-//@flow
 
 import React, {Component} from 'react'
 import Component3 from '../Component3/Component3'

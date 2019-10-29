@@ -19,15 +19,18 @@ export const setCardData = (
   lastName: string,
   secretQuestion: string,
   secretAnswer: string,
-) => {
-  return
-  {
-    type: SET_CARD_DATA
-    payload: {
-      creditCardNumber, expirationDate, cvv, firstName, lastName, secretQuestion, secretAnswer
-    }
-  }
-}
+) => ({
+  type: SET_CARD_DATA,
+  payload: {
+    creditCardNumber,
+    cvv,
+    expirationDate,
+    firstName,
+    lastName,
+    secretQuestion,
+    secretAnswer,
+  },
+})
 
 //validation
 

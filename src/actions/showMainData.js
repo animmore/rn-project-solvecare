@@ -7,7 +7,7 @@ export const showMainData = () => (dispatch, getState) => {
   dispatch({type: SHOW_CARD_MAIN_DATA_REQUEST})
 
   const state = getState()
-  const values = state.setData
+  const values = state.creditCardData
 
   new ServerService()
     .validateCardData(values)
