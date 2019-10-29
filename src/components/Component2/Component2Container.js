@@ -15,7 +15,9 @@ type Props = {
   isFormVisible: boolean,
 }
 
-type State = {}
+type State = {
+  typeOfCard: '',
+}
 
 export class Component2Container extends Component<Props, State> {
   state = {
@@ -39,10 +41,9 @@ export class Component2Container extends Component<Props, State> {
   }
 
   render() {
-    const {typeOfCard} = this.state
-
     return (
       <Component2
+        typeOfCard={this.state.typeOfCard}
         creditCardNumber={this.props.creditCardNumber}
         firstName={this.props.firstName}
         lastName={this.props.lastName}

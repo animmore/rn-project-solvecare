@@ -18,7 +18,7 @@ type State = {
 }
 
 const Component2 = ({
-  cardType,
+  typeOfCard,
   firstName,
   lastName,
   creditCardNumber,
