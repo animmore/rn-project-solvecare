@@ -11,8 +11,8 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native'
-import ContainerC1 from '../Component1/ContainerC1'
-import ContainerC2 from '../Component2/ContainerC2'
+import Component1Container from '../Component1/Component1Container'
+import Component2Container from '../Component2/Component2Container'
 import {Provider} from 'react-redux'
 import {store} from '../../configs/createStore'
 
@@ -24,13 +24,12 @@ type Props = {}
 type State = {}
 
 export class App extends Component<Props, State> {
-
   render() {
     return (
       <Provider store={store}>
         <ScrollView style={styles.container}>
-          <ContainerC1 />
-          <ContainerC2 />
+          <Component1Container />
+          <Component2Container />
         </ScrollView>
       </Provider>
     )

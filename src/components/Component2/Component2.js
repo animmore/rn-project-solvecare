@@ -17,84 +17,64 @@ type State = {
   typeOfCard: string,
 }
 
-export class Component2 extends Component<Props, State> {
-  state = {
-    typeOfCard: '',
+const Component2 = ({
+  cardType,
+  firstName,
+  lastName,
+  creditCardNumber,
+  isError,
+  isLoading,
+  isFormVisible,
+}) => {
+  if (isError) {
+    return (
+      <View style={styles.err}>
+        <Text style={styles.errMessage}>
+          You have entered invalid data. {'\n'} Please, try again!
+        </Text>
+      </View>
+    )
   }
 
-  componentDidUpdate = (prevProps: Props) => {
-    if (prevProps.creditCardNumber !== this.props.creditCardNumber) {
-      this.onTypeOfCard()
-    }
+  if (isLoading) {
+    return (
+      <View>
+        <ActivityIndicator size="large" />
+      </View>
+    )
   }
 
-  onTypeOfCard = () => {
-    const {creditCardNumber} = this.props
-    const lastNums = creditCardNumber.slice(12, 16)
-    const typeOfCard = lastNums < 2000 ? 'Visa' : 'Master Card'
-
-    this.setState({
-      typeOfCard,
-    })
+  if (isFormVisible && !isError) {
+    return (
+      <View style={styles.Component2}>
+        <TextInput
+          style={styles.textinput}
+          placeholder="First Name"
+          placeholderTextColor="#FFFFFF"
+          value={firstName}
+        />
+        <TextInput
+          style={styles.textinput}
+          placeholder="Last Name"
+          placeholderTextColor="#FFFFFF"
+          value={lastName}
+        />
+        <TextInput
+          style={styles.textinput}
+          placeholder="Credit Card"
+          placeholderTextColor="#FFFFFF"
+          value={creditCardNumber.slice(12, 16)}
+        />
+        <TextInput
+          style={styles.textinput}
+          placeholder="Type of Card"
+          placeholderTextColor="#FFFFFF"
+          value={typeOfCard}
+        />
+      </View>
+    )
   }
-
-  render() {
-    
-    const {firstName, lastName, creditCardNumber, isLoading, isError} = this.props
-    const {typeOfCard} = this.state
-    const {isFormVisible} = this.props
-
-    if (isError) {
-      return (
-        <View style={styles.err}>
-          <Text style={styles.errMessage}>
-            You have entered invalid data. {'\n'} Please, try again!
-          </Text>
-        </View>
-      )
-    }
-
-    if (isLoading) {
-      return (
-        <View>
-          <ActivityIndicator size="large" />
-        </View>
-      )
-    }
-
-    if (isFormVisible && !isError) {
-      return (
-        <View style={styles.Component2}>
-          <TextInput
-            style={styles.textinput}
-            placeholder="First Name"
-            placeholderTextColor="#FFFFFF"
-            value={firstName}
-          />
-          <TextInput
-            style={styles.textinput}
-            placeholder="Last Name"
-            placeholderTextColor="#FFFFFF"
-            value={lastName}
-          />
-          <TextInput
-            style={styles.textinput}
-            placeholder="Credit Card"
-            placeholderTextColor="#FFFFFF"
-            value={creditCardNumber.slice(12, 16)}
-          />
-          <TextInput
-            style={styles.textinput}
-            placeholder="Type of Card"
-            placeholderTextColor="#FFFFFF"
-            value={typeOfCard}
-          />
-        </View>
-      )
-    }
-
-    return <View />
-  }
+  return <View />
 }
 
 const styles = StyleSheet.create({

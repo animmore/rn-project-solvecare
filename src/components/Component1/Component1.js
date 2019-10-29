@@ -33,123 +33,64 @@ type Props = {
 
 type State = {}
 
-export class Component1 extends Component<Props, State> {
-  constructor() {
-    super()
-    this.state = {
-      creditCardNumber: '',
-      cvv: '',
-      expirationDate: '',
-      firstName: '',
-      lastName: '',
-      secretQuestion: '',
-      secretAnswer: '',
-    }
-    this.handleCardInfo = this.handleCardInfo.bind(this)
-    this.onFormSubmit = this.onFormSubmit.bind(this)
-  }
+const Component1 = ({handleChange, handleInputChange}) => {
+  return (
+    <View style={styles.Component1}>
+      <Text style={styles.header}> Enter Yours Data </Text>
 
-  handleCardInfo = () => {
-    const {
-      creditCardNumber,
-      cvv,
-      expirationDate,
-      firstName,
-      lastName,
-      secretQuestion,
-      secretAnswer,
-    } = this.state
+      <TextInput
+        style={styles.textinput}
+        placeholder="0000 0000 0000 0000"
+        placeholderTextColor="#FFFFFF"
+        onChangeText={handleInputChange}
+      />
 
-    this.props.setCardData(
-      creditCardNumber,
-      cvv,
-      expirationDate,
-      firstName,
-      lastName,
-      secretQuestion,
-      secretAnswer,
-    )
-  }
-
-  onFormSubmit: (value: boolean) => void
-  onFormSubmit(value: boolean) {
-    this.props.onSubmit(value)
-  }
-
-  handleInputChange = (name: string) => (event: SyntheticEvent<HTMLInputElement>) => {
-    const {name, value} = event.currentTarget
-    this.setState({[name]: value})
-  }
-
-  onValidation() {
-    this.props.showMainData()
-  }
-
-  handleChange = () => {
-    this.onValidation(), this.onFormSubmit(true)
-    return true
-  }
-
-  render() {
-    console.log(this.props.isFormVisible)
-    return (
-      <View style={styles.Component1}>
-        <Text style={styles.header}> Enter Yours Data </Text>
-
+      <View style={styles.cont}>
         <TextInput
           style={styles.textinput}
-          placeholder="0000 0000 0000 0000"
+          placeholder="CVV/CVC"
           placeholderTextColor="#FFFFFF"
-          onChangeText={this.handleInputChange}
-        />
-
-        <View style={styles.cont}>
-          <TextInput
-            style={styles.textinput}
-            placeholder="CVV/CVC"
-            placeholderTextColor="#FFFFFF"
-            onChangeText={this.handleInputChange}
-          />
-          <TextInput
-            style={styles.textinput}
-            placeholder="MM/YY"
-            placeholderTextColor="#FFFFFF"
-            onChangeText={this.handleInputChange}
-          />
-        </View>
-
-        <View style={styles.cont}>
-          <TextInput
-            style={styles.textinput}
-            placeholder="Your name"
-            placeholderTextColor="#FFFFFF"
-            onChangeText={this.handleInputChange}
-          />
-          <TextInput
-            style={styles.textinput}
-            placeholder="Your surname"
-            placeholderTextColor="#FFFFFF"
-            onChangeText={this.handleInputChange}
-          />
-        </View>
-
-        <TextInput
-          style={styles.textinput}
-          placeholder="Your secret question"
-          placeholderTextColor="#FFFFFF"
-          onChangeText={this.handleInputChange}
+          onChangeText={handleInputChange}
         />
         <TextInput
           style={styles.textinput}
-          placeholder="Your secret answer"
+          placeholder="MM/YY"
           placeholderTextColor="#FFFFFF"
-          onChangeText={this.handleInputChange}
+          onChangeText={handleInputChange}
         />
-
-        <Button style={styles.button} title="SUBMIT" onPress={this.handleChange} />
       </View>
-    )
-  }
+
+      <View style={styles.cont}>
+        <TextInput
+          style={styles.textinput}
+          placeholder="Your name"
+          placeholderTextColor="#FFFFFF"
+          onChangeText={handleInputChange}
+        />
+        <TextInput
+          style={styles.textinput}
+          placeholder="Your surname"
+          placeholderTextColor="#FFFFFF"
+          onChangeText={handleInputChange}
+        />
+      </View>
+
+      <TextInput
+        style={styles.textinput}
+        placeholder="Your secret question"
+        placeholderTextColor="#FFFFFF"
+        onChangeText={handleInputChange}
+      />
+      <TextInput
+        style={styles.textinput}
+        placeholder="Your secret answer"
+        placeholderTextColor="#FFFFFF"
+        onChangeText={handleInputChange}
+      />
+
+      <Button style={styles.button} title="SUBMIT" onPress={handleChange} />
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({

@@ -11,7 +11,7 @@ const initialValue = {
   secretAnswer: '',
 }
 
-export const setData = (
+export const creditCardData = (
   state: {
     creditCardNumber: string,
     expirationDate: string,

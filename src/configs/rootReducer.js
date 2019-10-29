@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux'
-import {setData} from '../reducers/setData'
+import {creditCardData} from '../reducers/creditCardData'
 import {displayCard} from '../reducers/displayCard'
 import {cardInfo} from '../reducers/cardInfo'
 export const rootReducer = combineReducers({
-  setData,
+  creditCardData,
   displayCard,
   cardInfo,
 })
