@@ -1,4 +1,4 @@
-
+//@flow
 import React, {Component} from 'react'
 import Component3 from '../Component3/Component3'
 import PropTypes, {bool, object, number, any} from 'prop-types'
@@ -32,7 +32,7 @@ type Props = {
 
 type State = {}
 
-const Component1 = ({handleChange, handleInputChange}) => {
+function Component1({handleChange, handleInputChange}) {
   return (
     <View style={styles.Component1}>
       <Text style={styles.header}> Enter Yours Data </Text>
@@ -41,7 +41,7 @@ const Component1 = ({handleChange, handleInputChange}) => {
         style={styles.textinput}
         placeholder="0000 0000 0000 0000"
         placeholderTextColor="#FFFFFF"
-        onChangeText={handleInputChange}
+        onChangeText={handleInputChange('creditCardNumber')}
       />
 
       <View style={styles.cont}>
@@ -49,13 +49,13 @@ const Component1 = ({handleChange, handleInputChange}) => {
           style={styles.textinput}
           placeholder="CVV/CVC"
           placeholderTextColor="#FFFFFF"
-          onChangeText={handleInputChange}
+          onChangeText={handleInputChange('cvv')}
         />
         <TextInput
           style={styles.textinput}
           placeholder="MM/YY"
           placeholderTextColor="#FFFFFF"
-          onChangeText={handleInputChange}
+          onChangeText={handleInputChange('expirationDate')}
         />
       </View>
 
@@ -64,13 +64,13 @@ const Component1 = ({handleChange, handleInputChange}) => {
           style={styles.textinput}
           placeholder="Your name"
           placeholderTextColor="#FFFFFF"
-          onChangeText={handleInputChange}
+          onChangeText={handleInputChange('firstName')}
         />
         <TextInput
           style={styles.textinput}
           placeholder="Your surname"
           placeholderTextColor="#FFFFFF"
-          onChangeText={handleInputChange}
+          onChangeText={handleInputChange('lastName')}
         />
       </View>
 
@@ -78,13 +78,13 @@ const Component1 = ({handleChange, handleInputChange}) => {
         style={styles.textinput}
         placeholder="Your secret question"
         placeholderTextColor="#FFFFFF"
-        onChangeText={handleInputChange}
+        onChangeText={handleInputChange('secretQuestion')}
       />
       <TextInput
         style={styles.textinput}
         placeholder="Your secret answer"
         placeholderTextColor="#FFFFFF"
-        onChangeText={handleInputChange}
+        onChangeText={handleInputChange('secretAnswer')}
       />
 
       <Button style={styles.button} title="SUBMIT" onPress={handleChange} />

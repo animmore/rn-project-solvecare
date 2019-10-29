@@ -3,11 +3,8 @@ export const SHOW_CARD_MAIN_DATA_REQUEST = 'SHOW_CARD_MAIN_DATA_REQUEST'
 export const SHOW_CARD_MAIN_DATA_FAILURE = 'SHOW_CARD_MAIN_DATA_FAILURE'
 export const SHOW_CARD_MAIN_DATA_SUCCESS = 'SHOW_CARD_MAIN_DATA_SUCCESS'
 
-export const showMainData = () => (dispatch, getState) => {
+export const showMainData = (values) => (dispatch) => {
   dispatch({type: SHOW_CARD_MAIN_DATA_REQUEST})
-
-  const state = getState()
-  const values = state.creditCardData
 
   new ServerService()
     .validateCardData(values)

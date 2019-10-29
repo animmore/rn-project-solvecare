@@ -1,3 +1,4 @@
+//@flow
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Component1 from './Component1'
@@ -25,7 +26,7 @@ type Props = {
     secretQuestion: string,
     secretAnswer: string,
   ) => void,
-  
+
   onSubmit: (value: any) => void,
   showMainData: () => void,
 }
@@ -75,13 +76,25 @@ export class Component1Container extends Component<Props, State> {
     this.props.onSubmit(value)
   }
 
-  handleInputChange = (name: string) => (event: SyntheticEvent<HTMLInputElement>) => {
-    const {name, value} = event.currentTarget
-    this.setState({[name]: value})
+  // handleInputChange = (name: string) => (event: SyntheticEvent<HTMLInputElement>) => {
+  //   const {name, value} = event.currentTarget
+
+  //   console.log(name, value)
+
+  //   this.setState({[name]: value})
+  // }
+
+  handleInputChange = (name: string) => {
+    return (value) => {
+      console.log(value)
+
+      this.setState({[name]: value})
+    }
   }
 
   onValidation() {
-    this.props.showMainData()
+    const values = this.state
+    this.props.showMainData(values)
   }
 
   handleChange = () => {
