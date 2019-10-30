@@ -1,3 +1,4 @@
+//@flow
 import {Action} from 'rxjs/internal/scheduler/Action'
 import {statement} from '@babel/template'
 

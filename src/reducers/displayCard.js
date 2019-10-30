@@ -1,8 +1,14 @@
+//@flow
 const initialValue = {
   isFormVisible: false,
 }
 
-export const displayCard = (state = initialValue, action) => {
+export const displayCard = (
+  state: {
+    isFormVisible: boolean,
+  } = initialValue,
+  action: {type:string, payload: any},
+) => {
   switch (action.type) {
     case 'ON_SUBMIT':
       return {

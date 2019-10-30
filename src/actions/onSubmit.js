@@ -1,4 +1,5 @@
-export const onSubmit = (isFormVisible) => {
+//@flow
+export const onSubmit = (isFormVisible:boolean) => {
   // validation
 
   return {

@@ -9,17 +9,30 @@ import {
   TextInput,
   Image,
   Button,
+  Switch,
 } from 'react-native'
 
 type Props = {}
 
 type State = {
   data: any,
+  valueSwitch: boolean,
 }
 
 export class ComponentList extends Component<Props, State> {
   state = {
     data: [],
+    valueSwitch: false,
+  }
+
+  componentDidMount() {
+    this.fetchData()
+  }
+
+  fetchData = async () => {
+    const response = await fetch('https://randomuser.me/api?results=5')
+    const json = await response.json()
+    this.setState({data: json.results})
   }
 
   addItem = () => {}
@@ -30,14 +43,8 @@ export class ComponentList extends Component<Props, State> {
     return (value: string) => this.setState({[name]: value})
   }
 
-  componentDidMount() {
-    this.fetchData()
-  }
-
-  fetchData = async () => {
-    const response = await fetch('https://randomuser.me/api?results=15')
-    const json = await response.json()
-    this.setState({data: json.results})
+  handleSwitch = (switchValue: boolean) => {
+    this.setState({valueSwitch: switchValue})
   }
 
   render() {
@@ -48,11 +55,11 @@ export class ComponentList extends Component<Props, State> {
           keyExtractor={(item, index) => `${index}`}
           renderItem={({item, index}) => (
             <View style={{flex: 1, flexDirection: 'row'}}>
-              <Image source={{uri: item.picture.large}} style={styles.images} />
+              <Switch value={this.state.valueSwitch} onValueChange={this.handleSwitch} />
               <Text style={styles.numUsers}>{index + 1}</Text>
               <Text style={styles.userName}>{` ${item.name.first} ${item.name.last}`}</Text>
             </View>
-          )}
+          )} //<Image source={{uri: item.picture.large}} style={styles.images} />
         />
         <TextInput
           placeholder="Type something..."

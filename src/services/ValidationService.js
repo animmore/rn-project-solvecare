@@ -1,3 +1,4 @@
+//@flow
 const cardRegex = RegExp(/^[0-9]{16}$/)
 const cvvRegex = RegExp(/^[0-9]{3,4}$/)
 const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/)
@@ -12,7 +13,15 @@ function assert(expression, message, errors) {
   }
 }
 
-export const onValidation = (values) => {
+export const onValidation = (values: {
+  creditCardNumber: string,
+  cvv: string,
+  expirationDate: string,
+  firstName: string,
+  lastName: string,
+  secretQuestion: string,
+  secretAnswer: string,
+}) => {
   const errors = []
 
   const {

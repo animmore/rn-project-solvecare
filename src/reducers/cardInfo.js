@@ -1,3 +1,5 @@
+//@flow
+
 import {
   SHOW_CARD_MAIN_DATA_REQUEST,
   SHOW_CARD_MAIN_DATA_SUCCESS,
@@ -11,7 +13,13 @@ const initialValue = {
   isFormSubmit: false,
 }
 
-export const cardInfo = (state = initialValue, action) => {
+export const cardInfo = (
+  state: {
+    requestStatus: string,
+    isFormSubmit: boolean,
+  } = initialValue,
+  action: {type: string, isFormSubmit: boolean},
+) => {
   switch (action.type) {
     case SHOW_CARD_MAIN_DATA_REQUEST:
       return {

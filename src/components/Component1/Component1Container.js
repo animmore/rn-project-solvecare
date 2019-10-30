@@ -8,13 +8,6 @@ import {showMainData} from '../../actions/showMainData'
 
 type Props = {
   isError: boolean,
-  creditCardNumber: string,
-  expirationDate: string,
-  cvv: string,
-  firstName: string,
-  lastName: string,
-  secretQuestion: string,
-  secretAnswer: string,
   isFormVisible: boolean,
 
   setCardData: (
@@ -31,7 +24,15 @@ type Props = {
   showMainData: () => void,
 }
 
-type State = {}
+type State = {
+  creditCardNumber: string,
+  cvv: string,
+  expirationDate: string,
+  firstName: string,
+  lastName: string,
+  secretQuestion: string,
+  secretAnswer: string,
+}
 
 export class Component1Container extends Component<Props, State> {
   constructor() {
@@ -76,16 +77,8 @@ export class Component1Container extends Component<Props, State> {
     this.props.onSubmit(value)
   }
 
-  // handleInputChange = (name: string) => (event: SyntheticEvent<HTMLInputElement>) => {
-  //   const {name, value} = event.currentTarget
-
-  //   console.log(name, value)
-
-  //   this.setState({[name]: value})
-  // }
-
   handleInputChange = (name: string) => {
-    return (value) => {
+    return (value: string) => {
       console.log(value)
 
       this.setState({[name]: value})

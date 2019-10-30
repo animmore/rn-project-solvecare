@@ -1,5 +1,4 @@
 //@flow
-
 import React, {Component} from 'react'
 import Component2 from './Component2'
 import {connect} from 'react-redux'
@@ -9,14 +8,14 @@ type Props = {
   firstName: string,
   lastName: string,
   creditCardNumber: string,
-
   isLoading: boolean,
   isError: boolean,
   isFormVisible: boolean,
+  
 }
 
 type State = {
-  typeOfCard: '',
+  typeOfCard: string,
 }
 
 export class Component2Container extends Component<Props, State> {

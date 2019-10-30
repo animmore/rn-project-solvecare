@@ -6,8 +6,7 @@ type Props = {
   firstName: string,
   lastName: string,
   creditCardNumber: string,
-  typeOfCard: any,
-
+  typeOfCard: string,
   isLoading: boolean,
   isError: boolean,
   isFormVisible: boolean,
@@ -25,7 +24,7 @@ const Component2 = ({
   isError,
   isLoading,
   isFormVisible,
-}) => {
+}: Props) => {
   if (isError) {
     return (
       <View style={styles.err}>

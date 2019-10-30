@@ -9,30 +9,19 @@ import {callApi} from '../../services/ServerService'
 type Props = {
   isError: boolean,
   isFormVisible: boolean,
-  creditCardNumber: string,
-  expirationDate: string,
-  cvv: string,
-  firstName: string,
-  lastName: string,
-  secretQuestion: string,
-  secretAnswer: string,
 
+  handleChange: () => void,
   showMainData: () => void,
   onValidation: () => void,
   onFormSubmit: (value: boolean) => void,
   onSubmit: (value: any) => void,
-  setCreditCardNumber: (value: string) => void,
-  setCvv: (value: string) => void,
-  setExpirationDate: (value: string) => void,
-  setFirstName: (value: string) => void,
-  setLastName: (value: string) => void,
-  setSecretQuestion: (value: string) => void,
-  setSecretAnswer: (value: string) => void,
+  handleChange: () => void,
+  handleInputChange: (name: string) => any,
 }
 
 type State = {}
 
-function Component1({handleChange, handleInputChange}) {
+function Component1({handleChange, handleInputChange}: Props) {
   return (
     <View style={styles.Component1}>
       <Text style={styles.header}> Enter Yours Data </Text>
