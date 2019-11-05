@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react'
-import {FlatList, ScrollView, StyleSheet, Text, View, TextInput, Button, Switch} from 'react-native'
+import {FlatList, StyleSheet, Text, View, TextInput, Button, Switch} from 'react-native'
 import useComponentList from './useComponentList'
 
 const ComponentList = () => {
@@ -13,37 +13,24 @@ const ComponentList = () => {
     addItem,
     removeItem,
     onSwitchChange,
+    renderItem,
   } = useComponentList()
-
-  const renderItem = ({item, index}) => {
-    return (
-      <View style={styles.item}>
-        <View style={styles.switch}>
-          <Switch onValueChange={(value) => onSwitchChange(item.id, value)} value={item.isSelect} />
-        </View>
-        <Text style={styles.numUsers}>{item.id}</Text>
-        <Text style={styles.userName}>{item.name}</Text>
-        <Text style={styles.userName}>{item.title}</Text>
-      </View>
-    )
-  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>List of users</Text>
-
+      <Text style={styles.header}>List</Text>
       <FlatList
         data={data}
         renderItem={(item, index) => renderItem(item, index)}
         keyExtractor={(data, index) => `${index}`}
       />
-      <View>
-        <TextInput
-          onChangeText={handleTextInput('textInput')}
-          value={textInput}
-          style={styles.addInput}
-        />
-      </View>
+      <TextInput
+        onChangeText={handleTextInput('textInput')}
+        value={textInput}
+        style={styles.addInput}
+        placeholder={'Enter some data..'}
+        onFocus={onFocusTextInput}
+      />
       <View style={styles.containerBtn}>
         <Button style={styles.btn} title="Add item" onPress={addItem} disabled={!isAdd} />
         <Button style={styles.btn} title="Remove item" onPress={removeItem} disabled={!isRemove} />

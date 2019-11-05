@@ -14,8 +14,8 @@ import {
 export const useComponentList = () => {
   const [data, setData] = useState([])
   const [textInput, setTextInput] = useState('')
-  const [isAdd, setIsAdd] = useState(true)
-  const [isRemove, setIsRemove] = useState(true)
+  const [isAdd, setIsAdd] = useState(false)
+  const [isRemove, setIsRemove] = useState(false)
 
   const fetchData = () => {
     fetch('https://api.coinmarketcap.com/v1/ticker/?limit=5')
@@ -45,6 +45,7 @@ export const useComponentList = () => {
         }
       })
       setData([...data])
+      setIsRemove(true)
     },
     [data],
   )
@@ -70,18 +71,21 @@ export const useComponentList = () => {
   }, [data])
 
   const onFocusTextInput = useCallback(() => {
+    setIsAdd(true)
     setIsRemove(false)
-  }, [isRemove])
+  }, [isRemove, isAdd])
 
-  const renderItem = (items) => {
+  const renderItem = ({item, index}) => {
     return (
       <View style={styles.item}>
         <View style={styles.switch}>
           <Switch onValueChange={(value) => onSwitchChange(item.id, value)} value={item.isSelect} />
         </View>
-        <Text style={styles.numUsers}>{item.id}</Text>
-        <Text style={styles.userName}>{item.name}</Text>
-        <Text style={styles.userName}>{item.title}</Text>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
+          <Text style={styles.numUsers}>{item.id}</Text>
+          <Text style={styles.userName}>{item.name}</Text>
+          <Text style={styles.userName}>{item.title}</Text>
+        </View>
       </View>
     )
   }
@@ -129,5 +133,6 @@ const styles = StyleSheet.create({
   numUsers: {
     fontSize: 19,
     color: '#23AA8F',
+    marginBottom: 20,
   },
 })
