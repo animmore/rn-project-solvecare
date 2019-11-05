@@ -1,76 +1,55 @@
-// @flow
-import React, {Component} from 'react'
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-  ActivityIndicator,
-  TextInput,
-  Image,
-  Button,
-  Switch,
-} from 'react-native'
+import React, {useState, useEffect, useCallback} from 'react'
+import {FlatList, ScrollView, StyleSheet, Text, View, TextInput, Button, Switch} from 'react-native'
+import useComponentList from './useComponentList'
 
-type Props = {}
+const ComponentList = () => {
+  const {
+    data,
+    handleTextInput,
+    onFocusTextInput,
+    textInput,
+    isAdd,
+    isRemove,
+    addItem,
+    removeItem,
+    onSwitchChange,
+  } = useComponentList()
 
-type State = {
-  data: any,
-  valueSwitch: boolean,
-}
-
-export class ComponentList extends Component<Props, State> {
-  state = {
-    data: [],
-    valueSwitch: false,
-  }
-
-  componentDidMount() {
-    this.fetchData()
-  }
-
-  fetchData = async () => {
-    const response = await fetch('https://randomuser.me/api?results=5')
-    const json = await response.json()
-    this.setState({data: json.results})
-  }
-
-  addItem = () => {}
-
-  removeItem = () => {}
-
-  handleInputChange = (name: string) => {
-    return (value: string) => this.setState({[name]: value})
-  }
-
-  handleSwitch = (switchValue: boolean) => {
-    this.setState({valueSwitch: switchValue})
-  }
-
-  render() {
+  const renderItem = ({item, index}) => {
     return (
-      <View style={styles.container}>
-        <FlatList
-          data={this.state.data}
-          keyExtractor={(item, index) => `${index}`}
-          renderItem={({item, index}) => (
-            <View style={{flex: 1, flexDirection: 'row'}}>
-              <Switch value={this.state.valueSwitch} onValueChange={this.handleSwitch} />
-              <Text style={styles.numUsers}>{index + 1}</Text>
-              <Text style={styles.userName}>{` ${item.name.first} ${item.name.last}`}</Text>
-            </View>
-          )} //<Image source={{uri: item.picture.large}} style={styles.images} />
-        />
-        <TextInput
-          placeholder="Type something..."
-          style={styles.addInput}
-          onChangeText={this.handleInputChange}
-        />
-        <Button title="Add" onPress={this.addItem} />
-        <Button title="Delete" onPress={this.removeItem} />
+      <View style={styles.item}>
+        <View style={styles.switch}>
+          <Switch onValueChange={(value) => onSwitchChange(item.id, value)} value={item.isSelect} />
+        </View>
+        <Text style={styles.numUsers}>{item.id}</Text>
+        <Text style={styles.userName}>{item.name}</Text>
+        <Text style={styles.userName}>{item.title}</Text>
       </View>
     )
   }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>List of users</Text>
+
+      <FlatList
+        data={data}
+        renderItem={(item, index) => renderItem(item, index)}
+        keyExtractor={(data, index) => `${index}`}
+      />
+      <View>
+        <TextInput
+          onChangeText={handleTextInput('textInput')}
+          value={textInput}
+          style={styles.addInput}
+        />
+      </View>
+      <View style={styles.containerBtn}>
+        <Button style={styles.btn} title="Add item" onPress={addItem} disabled={!isAdd} />
+        <Button style={styles.btn} title="Remove item" onPress={removeItem} disabled={!isRemove} />
+      </View>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -81,19 +60,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fafa6e',
   },
+  header: {
+    alignSelf: 'center',
+    fontSize: 22,
+    marginTop: 30,
+  },
   addInput: {
     width: '70%',
     fontSize: 22,
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
   },
   containerBtn: {
     flex: 1,
     marginBottom: 50,
-  },
-  images: {
-    width: '50%',
-    height: 100,
-    margin: 7,
-    borderRadius: 7,
   },
   userName: {
     fontSize: 19,
