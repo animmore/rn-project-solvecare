@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {
   StyleSheet,
   View,
@@ -10,89 +10,111 @@ import {
   Picker,
   Alert,
 } from 'react-native'
+import useProductCard from './useProductCard'
 
-export class ProductCard extends Component {
-  state = {
-    title: '',
-    weight: '',
-    size: '',
-    producedBy: '',
-    pickerValue: '',
-  }
+const ProductCard = () => {
+  const {
+    product,
+    weight,
+    size,
+    producedBy,
+    isCreated,
+    handleTextInput,
+    createProduct,
+    editProduct,
+    onValueChange,
+  } = useProductCard()
 
-  handleChange = ({target}) => {
-    this.setState({[target.name]: target.value})
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.btntext}>Create</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.btntext}>Edit</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <TextInput
-            placeholder="Enter title"
-            style={styles.textinput}
-            placeholderTextColor="black"
-          />
-
-          <TextInput
-            placeholder="Enter weight"
-            style={styles.textinput}
-            placeholderTextColor="black"
-          />
-
-          <TextInput
-            placeholder="Enter size"
-            style={styles.textinput}
-            placeholderTextColor="black"
-          />
-
-          <View style={styles.pickerCont}>
-            <Text> Produced by: </Text>
-            <Picker
-              selectedValue={this.state.pickerValue}
-              onValueChange={(itemValue, itemIndex) => this.setState({pickerValue: itemValue})}
-              itemStyle={{color: 'black'}}
-              style={{height: 50, width: 120}}
-            >
-              <Picker.Item label="USA" value="USA" />
-              <Picker.Item label="Ukraine" value="Ukraine" />
-              <Picker.Item label="China" value="China" />
-            </Picker>
-          </View>
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>Product card</Text>
+      <View>
+        <TextInput
+          placeholder="Enter name of product"
+          style={styles.textinput}
+          onChangeText={handleTextInput('product')}
+        />
+        <TextInput
+          placeholder="Enter weight of product"
+          style={styles.textinput}
+          onChangeText={handleTextInput('weight')}
+        />
+        <TextInput
+          placeholder="Enter size of product"
+          style={styles.textinput}
+          onChangeText={handleTextInput('size')}
+        />
+        <View style={styles.pickerCont}>
+          <Text style={styles.pickerTitle}> Made in: {producedBy} </Text>
+          <Picker
+            selectedValue={producedBy}
+            onValueChange={onValueChange}
+            style={{height: 50, width: 120}}
+          >
+            <Picker.Item label="USA" value="USA" />
+            <Picker.Item label="Ukraine" value="Ukraine" />
+            <Picker.Item label="China" value="China" />
+          </Picker>
         </View>
       </View>
-    )
-  }
+      <View style={styles.btnContainer}>
+        <Button title="Create" onPress={createProduct} />
+      </View>
+
+      <View style={styles.btnTabContainer}>
+      
+        <TouchableOpacity style={styles.btnTab}>
+          <Text style={styles.textBtnTab}>CREATE</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btnTab}>
+          <Text style={styles.textBtnTab}>EDIT</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
+
+  
 }
 
 const styles = StyleSheet.create({
+  textBtnTab: {
+    alignSelf: 'center',
+    alignContent: 'center',
+  },
   container: {
     alignSelf: 'stretch',
   },
+  header: {
+    alignSelf: 'center',
+    fontSize: 22,
+    marginTop: 45,
+  },
   pickerCont: {
-    flex: 1,
-    justifyContent: 'center',
     margin: 20,
+  },
+  pickerTitle: {
+    fontSize: 22,
+  },
+  btnTabContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 70,
+  },
+  btnTab: {
+    // width: 150,
+    // height: 45,
+    // backgroundColor: 'gray',
+    // borderRadius: 15,
   },
   btnContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     flex: 1,
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    padding: 20,
-    marginTop: 50,
+
+    marginTop: 150,
   },
   textinput: {
-    alignSelf: 'stretch',
     fontSize: 18,
     height: 40,
     marginTop: 30,
