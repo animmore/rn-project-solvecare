@@ -13,24 +13,36 @@ const ComponentList = () => {
     addItem,
     removeItem,
     onSwitchChange,
-    renderItem,
   } = useComponentList()
+
+  renderItem = ({item, index}) => {
+    return (
+      <View style={styles.item}>
+        <View style={styles.switch}>
+          <Switch onValueChange={(value) => onSwitchChange(item.id, value)} value={item.isSelect} />
+        </View>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
+          <Text style={styles.numUsers}>{item.id}</Text>
+          <Text style={styles.userName}>{item.name}</Text>
+          <Text style={styles.userName}>{item.newValue}</Text>
+        </View>
+      </View>
+    )
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>List</Text>
-      <FlatList
-        data={data}
-        renderItem={(item, index) => renderItem(item, index)}
-        keyExtractor={(data, index) => `${index}`}
-      />
-      <TextInput
-        onChangeText={handleTextInput('textInput')}
-        value={textInput}
-        style={styles.addInput}
-        placeholder={'Enter some data..'}
-        onFocus={onFocusTextInput}
-      />
+      <FlatList data={data} renderItem={renderItem} keyExtractor={(data, index) => `${index}`} />
+      <View>
+        <TextInput
+          onChangeText={handleTextInput('textInput')}
+          value={textInput}
+          style={styles.addInput}
+          placeholder={'Enter some data..'}
+          onFocus={onFocusTextInput}
+        />
+      </View>
       <View style={styles.containerBtn}>
         <Button style={styles.btn} title="Add item" onPress={addItem} disabled={!isAdd} />
         <Button style={styles.btn} title="Remove item" onPress={removeItem} disabled={!isRemove} />
@@ -59,7 +71,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   containerBtn: {
-    flex: 1,
     marginBottom: 50,
   },
   userName: {

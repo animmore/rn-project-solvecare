@@ -1,15 +1,4 @@
 import React, {useState, useEffect, useCallback} from 'react'
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-  ActivityIndicator,
-  TextInput,
-  Image,
-  Button,
-  Switch,
-} from 'react-native'
 
 export const useComponentList = () => {
   const [data, setData] = useState([])
@@ -56,12 +45,12 @@ export const useComponentList = () => {
 
   const addItem = () => {
     const newObj = {
-      id: Math.floor(Math.random() * 10),
-      title: textInput,
+      id: textInput.toLocaleLowerCase() + Math.floor(Math.random() * 10),
+      newValue: textInput,
       isSelect: false,
     }
 
-    setData([newObj, ...data])
+    setData([...data, newObj])
     setTextInput('')
   }
 
@@ -75,23 +64,7 @@ export const useComponentList = () => {
     setIsRemove(false)
   }, [isRemove, isAdd])
 
-  const renderItem = ({item, index}) => {
-    return (
-      <View style={styles.item}>
-        <View style={styles.switch}>
-          <Switch onValueChange={(value) => onSwitchChange(item.id, value)} value={item.isSelect} />
-        </View>
-        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
-          <Text style={styles.numUsers}>{item.id}</Text>
-          <Text style={styles.userName}>{item.name}</Text>
-          <Text style={styles.userName}>{item.title}</Text>
-        </View>
-      </View>
-    )
-  }
-
   return {
-    renderItem,
     data,
     handleTextInput,
     onFocusTextInput,
@@ -104,35 +77,3 @@ export const useComponentList = () => {
   }
 }
 export default useComponentList
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fafa6e',
-  },
-  header: {
-    alignSelf: 'center',
-    fontSize: 22,
-    marginTop: 30,
-  },
-  addInput: {
-    width: '70%',
-    fontSize: 22,
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-  },
-  containerBtn: {
-    flex: 1,
-    marginBottom: 50,
-  },
-  userName: {
-    fontSize: 19,
-  },
-  numUsers: {
-    fontSize: 19,
-    color: '#23AA8F',
-    marginBottom: 20,
-  },
-})
