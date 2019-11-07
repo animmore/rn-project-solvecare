@@ -13,7 +13,7 @@ function assert(expression, message, errors) {
   }
 }
 
-export const onValidation = (values: {
+export const onValidation = (initialCardData: {
   creditCardNumber: string,
   cvv: string,
   expirationDate: string,
@@ -32,7 +32,7 @@ export const onValidation = (values: {
     lastName,
     secretQuestion,
     secretAnswer,
-  } = values
+  } = initialCardData
 
   assert(creditCardNumber.match(cardRegex), 'invalid card number', errors)
   assert(cvv.match(cvvRegex), 'invalid CVV/CVC', errors)

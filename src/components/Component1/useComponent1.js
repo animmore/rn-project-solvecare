@@ -3,7 +3,11 @@ import {setCardData, setIsFormVisible} from '../../actions/actions'
 import {onSubmit} from '../../actions/onSubmit'
 import {showMainData} from '../../actions/showMainData'
 
-export const useComponent1 = (showMainData, onSubmit, setCardData, setIsFormVisible) => {
+import {useDispatch} from 'react-redux'
+
+export const useComponent1 = () => {
+  const dispatch = useDispatch()
+
   const [cardData, setAllCardData] = useState({
     creditCardNumber: '',
     cvv: '',
@@ -35,14 +39,16 @@ export const useComponent1 = (showMainData, onSubmit, setCardData, setIsFormVisi
       secretAnswer,
     } = cardData
 
-    setCardData(
-      creditCardNumber,
-      cvv,
-      expirationDate,
-      firstName,
-      lastName,
-      secretQuestion,
-      secretAnswer,
+    dispatch(
+      setCardData(
+        creditCardNumber,
+        cvv,
+        expirationDate,
+        firstName,
+        lastName,
+        secretQuestion,
+        secretAnswer,
+      ),
     )
   }, [cardData])
 
@@ -51,11 +57,11 @@ export const useComponent1 = (showMainData, onSubmit, setCardData, setIsFormVisi
   })
 
   const onFormSubmit = useCallback((value) => {
-    onSubmit(value)
+    dispatch(onSubmit(value))
   })
 
   const onValidation = useCallback(() => {
-    showMainData(cardData)
+    dispatch(showMainData(cardData))
   })
 
   const handleChange = useCallback(() => {

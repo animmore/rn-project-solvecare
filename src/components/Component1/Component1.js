@@ -86,12 +86,12 @@ function Component1() {
   )
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     isFormVisible: state.displayCard.isFormVisible,
-//     isFormSubmit: state.cardInfo.isFormSubmit,
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    isFormVisible: state.displayCard.isFormVisible,
+    isFormSubmit: state.cardInfo.isFormSubmit,
+  }
+}
 
 const mapDispatchToProps = {
   setCardData,

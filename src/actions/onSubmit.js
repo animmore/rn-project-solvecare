@@ -1,7 +1,5 @@
 //@flow
-export const onSubmit = (isFormVisible:boolean) => {
-  // validation
-
+export const onSubmit = (isFormVisible: boolean) => {
   return {
     type: 'ON_SUBMIT',
     payload: {

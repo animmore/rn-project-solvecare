@@ -1,10 +1,10 @@
 
 import {onValidation} from './ValidationService'
 
-const callApi = (values) => {
+const callApi = (initialCardData) => {
   return new Promise((resolve, reject) => {
-    const error = onValidation(values)
-    console.log(values)
+    const error = onValidation(initialCardData)
+    console.log(initialCardData)
     const sendResponse = () => {
       error ? reject(error) : resolve()
     }
@@ -13,13 +13,13 @@ const callApi = (values) => {
   })
 }
 
-const onServerValidation = (values) => {
-  return callApi(values)
+const onServerValidation = (initialCardData) => {
+  return callApi(initialCardData)
 }
 
 class ServerService {
-  validateCardData(values) {
-    return onServerValidation(values)
+  validateCardData(initialCardData) {
+    return onServerValidation(initialCardData)
   }
 }
 
