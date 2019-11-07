@@ -5,23 +5,28 @@ import PropTypes, {bool, object, number, any} from 'prop-types'
 import {StyleSheet, View, Text, TextInput, Button, ScrollView} from 'react-native'
 import {bold} from 'ansi-colors'
 import {callApi} from '../../services/ServerService'
+import {connect} from 'react-redux'
 
-type Props = {
-  isError: boolean,
-  isFormVisible: boolean,
+import {setCardData, setIsFormVisible} from '../../actions/actions'
+import {onSubmit} from '../../actions/onSubmit'
+import {showMainData} from '../../actions/showMainData'
 
-  handleChange: () => void,
-  showMainData: () => void,
-  onValidation: () => void,
-  onFormSubmit: (value: boolean) => void,
-  onSubmit: (value: any) => void,
-  handleChange: () => void,
-  handleInputChange: (name: string) => any,
-}
+import {useComponent1} from './useComponent1'
 
-type State = {}
+function Component1() {
+  const {
+    creditCardNumber,
+    cvv,
+    expirationDate,
+    firstName,
+    lastName,
+    secretQuestion,
+    secretAnswer,
+    handleInputChange,
+    handleCardInfo,
+    handleChange,
+  } = useComponent1()
 
-function Component1({handleChange, handleInputChange}: Props) {
   return (
     <View style={styles.Component1}>
       <Text style={styles.header}> Enter Yours Data </Text>
@@ -81,6 +86,24 @@ function Component1({handleChange, handleInputChange}: Props) {
   )
 }
 
+// const mapStateToProps = (state) => {
+//   return {
+//     isFormVisible: state.displayCard.isFormVisible,
+//     isFormSubmit: state.cardInfo.isFormSubmit,
+//   }
+// }
+
+const mapDispatchToProps = {
+  setCardData,
+  onSubmit,
+  showMainData,
+}
+
+export default connect(
+  undefined,
+  mapDispatchToProps,
+)(Component1)
+
 const styles = StyleSheet.create({
   Component1: {
     alignSelf: 'stretch',
@@ -123,5 +146,3 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 })
-
-export default Component1
